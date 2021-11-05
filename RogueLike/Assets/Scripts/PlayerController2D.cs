@@ -6,13 +6,14 @@ public class PlayerController2D : MonoBehaviour
 {
     Vector2 movement;
     Vector2 movementInput;
+    Vector2 wallJump;
     public float movementSpeed = 30f;
     public float jumpForce = 8f;
 
     public bool canMove;
     private bool isOnGround = true;
-    private bool isOnEdge = false;
     private bool goodJump = true;
+    private bool canWallJump = false;
 
     private Rigidbody2D playerRb2D;
     private BoxCollider2D playerBc2D;
@@ -41,7 +42,7 @@ public class PlayerController2D : MonoBehaviour
 
             movement = movementInput * movementSpeed * Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.Space) & isOnGround || Input.GetKeyDown(KeyCode.Space) & isOnEdge)
+            if (Input.GetKeyDown(KeyCode.Space) & isOnGround)
             {
                 playerRb2D.bodyType = RigidbodyType2D.Dynamic;
                 playerRb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -59,6 +60,15 @@ public class PlayerController2D : MonoBehaviour
                 while (playerRb2D.velocity.y == 0);
             }
 
+            if (canWallJump)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Debug.Log(wallJump * jumpForce / 1.6f);
+                    playerRb2D.AddForce(wallJump * jumpForce / 1.6f, ForceMode2D.Impulse);
+                    canWallJump = false;
+                }
+            }
         }
     }
 
@@ -69,16 +79,40 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (transform.position.y - 0.5f > collision.transform.position.y & collision.GetContact(0).normal.y == 1 & collision.collider.gameObject.layer == 3)
+        if (collision.GetContact(0).normal.y == 1 & collision.collider.gameObject.layer == 3)
         {
             isOnGround = true;
-            isOnEdge = false;
             goodJump = true;
+            canWallJump = false;
+            playerRb2D.gravityScale = 1;
+            do
+            {
+                playerRb2D.velocity = new Vector2(playerRb2D.velocity.x, playerRb2D.velocity.y - 2);
+            }
+            while (playerRb2D.velocity.y == 0);
         }
 
         if (collision.collider.gameObject.layer == 6)
         {
-            movement = new Vector2(0, 0);
+            playerRb2D.velocity = new Vector2(0, 0);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.GetContact(0).normal.y == 1 & collision.collider.gameObject.layer == 3)
+        {
+            isOnGround = true;
+            goodJump = true;
+            canWallJump = false;
+            playerRb2D.gravityScale = 1;
+        }
+
+        if (collision.collider.gameObject.layer == 6 & isOnGround == false)
+        {
+            playerRb2D.gravityScale = 0.2f;
+            wallJump = collision.GetContact(0).normal + Vector2.up;
+            canWallJump = true;
         }
     }
 
@@ -92,19 +126,7 @@ public class PlayerController2D : MonoBehaviour
         if (collision.collider.gameObject.layer == 6)
         {
             movement = movementInput * movementSpeed * Time.deltaTime;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 3 & isOnEdge == false)
-        {
-            playerRb2D.bodyType = RigidbodyType2D.Static;
-            playerRb2D.velocity = new Vector2(0, 0);
-            playerRb2D.angularVelocity = 0;
-            movement = new Vector2(0, 0);
-            canMove = false;
-            isOnEdge = true;
+            playerRb2D.gravityScale = 1;
         }
     }
 }
