@@ -58,7 +58,6 @@ public class PlayerController2DVC : MonoBehaviour
         {
             colision = collision.GetContact(0).normal;
             Debug.Log(colision);
-            playerRb2D.AddForce(colision * 200, ForceMode2D.Impulse);
         }
     }
 }
