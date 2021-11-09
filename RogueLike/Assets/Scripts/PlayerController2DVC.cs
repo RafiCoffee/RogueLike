@@ -12,18 +12,26 @@ public class PlayerController2DVC : MonoBehaviour
     Vector2 colision;
     public float movementSpeed = 30f;
 
-    public bool canMove;
+    public bool canMove = false;
 
     private Rigidbody2D playerRb2D;
+
+    private RoomTemplates templates;
     // Start is called before the first frame update
     void Start()
     {
         playerRb2D = GetComponent<Rigidbody2D>();
+        templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (templates.waitTime <= 0)
+        {
+            canMove = true;
+        }
+
         if (canMove)
         {
             movementInput.x = Input.GetAxisRaw("Horizontal");

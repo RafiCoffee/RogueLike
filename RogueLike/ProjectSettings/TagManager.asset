@@ -8,6 +8,9 @@ TagManager:
   - Spawn Point
   - Rooms
   - EntryRoom
+  - WallDetect
+  - NormalRoom
+  - CameraPoint
   layers:
   - Default
   - TransparentFX

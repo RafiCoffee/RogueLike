@@ -24,27 +24,48 @@ public class RoomSpawner : MonoBehaviour
     {
         if (spawned == false)
         {
-            if (openingDirection == 1)
+            switch(openingDirection)
             {
-                randomRoom = Random.Range(0, templates.bottomRooms.Length);
-                Instantiate(templates.bottomRooms[randomRoom], transform.position, Quaternion.identity);
-            }
-            if (openingDirection == 2)
-            {
-                randomRoom = Random.Range(0, templates.topRooms.Length);
-                Instantiate(templates.topRooms[randomRoom], transform.position, Quaternion.identity);
-            }
-            if (openingDirection == 3)
-            {
-                randomRoom = Random.Range(0, templates.leftRooms.Length);
-                Instantiate(templates.leftRooms[randomRoom], transform.position, Quaternion.identity);
-            }
-            if (openingDirection == 4)
-            {
-                randomRoom = Random.Range(0, templates.rightRooms.Length);
-                Instantiate(templates.rightRooms[randomRoom], transform.position, Quaternion.identity);
-            }
+                case 1:
+                    randomRoom = Random.Range(0, templates.bottomRooms.Length);
+                    Instantiate(templates.bottomRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
 
+                case 2:
+                    randomRoom = Random.Range(0, templates.topRooms.Length);
+                    Instantiate(templates.topRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case 3:
+                    randomRoom = Random.Range(0, templates.leftRooms.Length);
+                    Instantiate(templates.leftRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case 4:
+                    randomRoom = Random.Range(0, templates.rightRooms.Length);
+                    Instantiate(templates.rightRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case 5:
+                    randomRoom = Random.Range(0, templates.bottomRooms.Length - 1);
+                    Instantiate(templates.bottomRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case 6:
+                    randomRoom = Random.Range(0, templates.topRooms.Length - 1);
+                    Instantiate(templates.topRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case 7:
+                    randomRoom = Random.Range(0, templates.leftRooms.Length - 1);
+                    Instantiate(templates.leftRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case 8:
+                    randomRoom = Random.Range(0, templates.rightRooms.Length - 1);
+                    Instantiate(templates.rightRooms[randomRoom], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+            }
             spawned = true;
         }
     }
@@ -55,7 +76,7 @@ public class RoomSpawner : MonoBehaviour
         {
             if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == false)
             {
-                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                Instantiate(templates.closedRoom, transform.position, Quaternion.identity, templates.room.transform);
                 Destroy(gameObject);
             }
             spawned = true;
