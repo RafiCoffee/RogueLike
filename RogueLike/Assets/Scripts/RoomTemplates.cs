@@ -15,7 +15,8 @@ public class RoomTemplates : MonoBehaviour
 
     public List<GameObject> rooms;
 
-    public int roomLimit;
+    public int roomMax;
+    public int roomMin;
     public float waitTime;
     private bool spawnedBoss = false;
     public GameObject boss;

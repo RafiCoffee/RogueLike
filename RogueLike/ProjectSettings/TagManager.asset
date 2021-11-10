@@ -11,6 +11,7 @@ TagManager:
   - WallDetect
   - NormalRoom
   - CameraPoint
+  - DungeonLimit
   layers:
   - Default
   - TransparentFX
