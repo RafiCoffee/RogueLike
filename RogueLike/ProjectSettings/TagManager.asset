@@ -12,6 +12,7 @@ TagManager:
   - NormalRoom
   - CameraPoint
   - DungeonLimit
+  - Attack
   layers:
   - Default
   - TransparentFX
