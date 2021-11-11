@@ -12,8 +12,7 @@ public class PlayerController2DVC : MonoBehaviour
     Vector2 movement;
     Vector2 movementInput;
     Vector2 colision;
-    Vector3 point;
-    Vector2 mousePos;
+    Vector2 point;
 
     public float movementSpeed = 30f;
 
@@ -21,14 +20,17 @@ public class PlayerController2DVC : MonoBehaviour
 
     private Rigidbody2D playerRb2D;
     private GameObject attackCollider;
+    private GameObject bullet;
 
     private RoomTemplates templates;
+    private BulletPool bulletPool;
     // Start is called before the first frame update
     void Start()
     {
         playerRb2D = GetComponent<Rigidbody2D>();
         attackCollider = GameObject.Find("AttackCollider");
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
 
         attackCollider.SetActive(false);
     }
@@ -62,6 +64,13 @@ public class PlayerController2DVC : MonoBehaviour
                 StartCoroutine(Attack());
             }
             //Ataque
+
+            //Disparar
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+            }
+            //Disparar
 
             //Para que el jugador mire donde anda
             if (movementInput.x < 0)
@@ -101,9 +110,12 @@ public class PlayerController2DVC : MonoBehaviour
             //Para que el jugador mire donde anda
 
             //Para que la cabeza mire donde apunte
-            Debug.Log(point);
+            float zCameraDepth = -Camera.main.transform.position.z;
+            Vector3 MouseScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, zCameraDepth);
+            Vector3 MouseWorldPoint = Camera.main.ScreenToWorldPoint(MouseScreenPoint);
+            Vector3 lookAtDirection = MouseWorldPoint - transform.GetChild(1).position;
 
-            transform.GetChild(1).LookAt(point);
+            transform.GetChild(1).up = lookAtDirection;
             //Para que la cabeza mire donde apunte
         }
     }
@@ -122,12 +134,12 @@ public class PlayerController2DVC : MonoBehaviour
         }
     }
 
-    void OnGUI()
+    public void Shoot()
     {
-        mousePos.x = Event.current.mousePosition.x;
-        mousePos.y = Camera.main.pixelHeight - Event.current.mousePosition.y;
-        point = new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane);
-
+        bullet = bulletPool.GetPooledObject();
+        bullet.SetActive(true);
+        bullet.transform.position = transform.GetChild(1).position;
+        bullet.transform.rotation = transform.GetChild(1).rotation;
     }
 
     IEnumerator Attack()
