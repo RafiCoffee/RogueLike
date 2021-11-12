@@ -25,6 +25,7 @@ public class PlayerController2DVC : MonoBehaviour
     private bool isDashing = false;
 
     private Rigidbody2D playerRb2D;
+
     private GameObject attackCollider;
     private GameObject bullet;
 
@@ -46,6 +47,7 @@ public class PlayerController2DVC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (templates.waitTime <= 0 && oneTime)
         {
             canMove = true;
@@ -66,35 +68,35 @@ public class PlayerController2DVC : MonoBehaviour
                         isDashing = true;
                         if (direction == 1)
                         {
-                            playerRb2D.velocity = Vector2.up * dashForce;
+                            playerRb2D.velocity = Vector2.up.normalized * dashForce;
                         }
                         else if (direction == 2)
                         {
-                            playerRb2D.velocity = Vector2.down * dashForce;
+                            playerRb2D.velocity = Vector2.down.normalized * dashForce;
                         }
                         else if (direction == 3)
                         {
-                            playerRb2D.velocity = Vector2.right * dashForce;
+                            playerRb2D.velocity = Vector2.right.normalized * dashForce;
                         }
                         else if (direction == 4)
                         {
-                            playerRb2D.velocity = Vector2.left * dashForce;
+                            playerRb2D.velocity = Vector2.left.normalized * dashForce;
                         }
                         else if (direction == 5)
                         {
-                            playerRb2D.velocity = new Vector2(-1, 1) * dashForce;
+                            playerRb2D.velocity = new Vector2(-1, 1).normalized * dashForce;
                         }
                         else if (direction == 6)
                         {
-                            playerRb2D.velocity = Vector2.one * dashForce;
+                            playerRb2D.velocity = Vector2.one.normalized * dashForce;
                         }
                         else if (direction == 7)
                         {
-                            playerRb2D.velocity = -Vector2.one * dashForce;
+                            playerRb2D.velocity = -Vector2.one.normalized * dashForce;
                         }
                         else if (direction == 8)
                         {
-                            playerRb2D.velocity = new Vector2(1, -1) * dashForce;
+                            playerRb2D.velocity = new Vector2(1, -1).normalized * dashForce;
                         }
                     }
                 }
@@ -140,44 +142,44 @@ public class PlayerController2DVC : MonoBehaviour
             if (movementInput.x < 0)
             {
                 direction = 4;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, 0.707106829f, 0.707106829f);
+                transform.rotation = new Quaternion(0, 0, 0.707106829f, 0.707106829f);
             }
             else if (movementInput.x > 0)
             {
                 direction = 3;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, -0.707106829f, 0.707106829f);
+                transform.rotation = new Quaternion(0, 0, -0.707106829f, 0.707106829f);
             }
 
             if (movementInput.y < 0)
             {
                 direction = 2;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, -1, 0);
+                transform.rotation = new Quaternion(0, 0, -1, 0);
             }
             else if (movementInput.y > 0)
             {
                 direction = 1;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, 0, 0);
+                transform.rotation = new Quaternion(0, 0, 0, 0);
             }
 
             if (movementInput.y > 0 & movementInput.x < 0)
             {
                 direction = 5;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, 0.382683426f, 0.923879564f);
+                transform.rotation = new Quaternion(0, 0, 0.382683426f, 0.923879564f);
             }
             else if (movementInput.y > 0 & movementInput.x > 0)
             {
                 direction = 6;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, -0.382683426f, 0.923879564f);
+                transform.rotation = new Quaternion(0, 0, -0.382683426f, 0.923879564f);
             }
             else if (movementInput.y < 0 & movementInput.x < 0)
             {
                 direction = 7;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, 0.923879564f, 0.382683426f);
+                transform.rotation = new Quaternion(0, 0, 0.923879564f, 0.382683426f);
             }
             else if (movementInput.y < 0 & movementInput.x > 0)
             {
                 direction = 8;
-                transform.GetChild(0).rotation = new Quaternion(0, 0, -0.923879564f, 0.382683426f);
+                transform.rotation = new Quaternion(0, 0, -0.923879564f, 0.382683426f);
             }
             //Para que el jugador mire donde anda
 
@@ -185,9 +187,10 @@ public class PlayerController2DVC : MonoBehaviour
             float zCameraDepth = -Camera.main.transform.position.z;
             Vector3 MouseScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, zCameraDepth);
             Vector3 MouseWorldPoint = Camera.main.ScreenToWorldPoint(MouseScreenPoint);
-            Vector3 lookAtDirection = MouseWorldPoint - transform.GetChild(1).position;
+            Vector3 lookAtDirection = MouseWorldPoint - transform.GetChild(3).position;
 
-            transform.GetChild(1).up = lookAtDirection;
+            Debug.Log(transform.GetChild(1).up);
+            transform.GetChild(3).up = lookAtDirection;
             //Para que la cabeza mire donde apunte
         }
     }
