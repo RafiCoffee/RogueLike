@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 735308532b37ae244b857129c28b269a
+guid: a77e9cd04b40f244fb9d40d78e72868b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8642332022937389255
-    second: B(BOSS)_0
+      213: 1183712954292276664
+    second: BOSS_DOWN_0
   - first:
-      213: 5150669900970233914
-    second: B(BOSS)_1
+      213: 3844943034262174515
+    second: BOSS_DOWN_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -129,44 +129,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: B(BOSS)_0
-      rect:
-        serializedVersion: 2
-        x: 1865
-        y: 0
-        width: 1195
-        height: 240
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7c88a229f2bbfe770800000000000000
-      internalID: 8642332022937389255
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B(BOSS)_1
+      name: BOSS_DOWN_0
       rect:
         serializedVersion: 2
         x: 0
@@ -174,14 +141,35 @@ TextureImporter:
         width: 4924
         height: 3081
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3090aa4cfada7740800000000000000
-      internalID: 5150669900970233914
+      spriteID: 8bd8e9c09a46d6010800000000000000
+      internalID: 1183712954292276664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_DOWN_1
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 0
+        width: 1189
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33b3fca715bfb5530800000000000000
+      internalID: 3844943034262174515
       vertices: []
       indices: 
       edges: []
@@ -189,7 +177,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: ffc4fd5df9e29294b9a83d494db6043c
     internalID: 0
     vertices: []
     indices: 

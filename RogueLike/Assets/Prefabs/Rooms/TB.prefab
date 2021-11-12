@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 6887364704189375552}
   m_Layer: 0
   m_Name: TB
-  m_TagString: EntryRoom
+  m_TagString: NormalRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

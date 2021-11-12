@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
+using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class PlayerController2DVC : MonoBehaviour
 {
@@ -18,6 +21,8 @@ public class PlayerController2DVC : MonoBehaviour
     public float movementSpeed = 30f;
     private float dashTime;
     public float StartDashTime;
+    public float dashCoolDown = 2;
+    private float dashTimer = 0;
 
     private bool oneTime = true;
     public bool canMove = false;
@@ -25,12 +30,15 @@ public class PlayerController2DVC : MonoBehaviour
     private bool isDashing = false;
 
     private Rigidbody2D playerRb2D;
+    private Slider dashSlider;
 
     private GameObject attackCollider;
     private GameObject bullet;
 
     private RoomTemplates templates;
     private BulletPool bulletPool;
+
+    private Stopwatch timer = new Stopwatch();
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +46,13 @@ public class PlayerController2DVC : MonoBehaviour
         attackCollider = GameObject.Find("AttackCollider");
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
+        dashSlider = GameObject.Find("Dash").GetComponent<Slider>();
 
         attackCollider.SetActive(false);
 
         dashTime = StartDashTime;
+
+        timer.Start();
     }
 
     // Update is called once per frame
@@ -55,10 +66,14 @@ public class PlayerController2DVC : MonoBehaviour
             oneTime = false;
         }
 
+        dashTimer += Time.deltaTime;
+
+        dashSlider.value = dashTimer;
+
         if (canDash)
         {
             //Dash
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) & timer.ElapsedMilliseconds / 1000 > dashCoolDown)
             {
                 canMove = false;
                 if (direction != 0)
@@ -112,6 +127,8 @@ public class PlayerController2DVC : MonoBehaviour
                     playerRb2D.velocity = Vector2.zero;
                     canMove = true;
                     isDashing = false;
+                    dashTimer = 0;
+                    timer.Restart();
                 }
             }
             //Dash
@@ -187,10 +204,9 @@ public class PlayerController2DVC : MonoBehaviour
             float zCameraDepth = -Camera.main.transform.position.z;
             Vector3 MouseScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, zCameraDepth);
             Vector3 MouseWorldPoint = Camera.main.ScreenToWorldPoint(MouseScreenPoint);
-            Vector3 lookAtDirection = MouseWorldPoint - transform.GetChild(3).position;
+            Vector3 lookAtDirection = MouseWorldPoint - transform.GetChild(1).position;
 
-            Debug.Log(transform.GetChild(1).up);
-            transform.GetChild(3).up = lookAtDirection;
+            transform.GetChild(1).up = lookAtDirection;
             //Para que la cabeza mire donde apunte
         }
     }
@@ -208,7 +224,7 @@ public class PlayerController2DVC : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             colision = collision.GetContact(0).normal;
-            Debug.Log(colision);
+            //Debug.Log(colision);
         }
     }
 
