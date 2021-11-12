@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -173,7 +173,11 @@ MonoBehaviour:
   - {fileID: 1978859056982087791, guid: d40f5c291f31a6f42bfab92e3fabfb6a, type: 3}
   - {fileID: 4969051495142109703, guid: 5173e41378b9b484380cdef3c130bdc8, type: 3}
   closedRoom: {fileID: 1489112619872502112, guid: 098bfb0c9a61f5f4b97e9650ae26f624, type: 3}
-  closedWall: {fileID: 1393166643291020402, guid: ad2f3155e516f9542b33c6c5335d6f79, type: 3}
+  closedWall:
+  - {fileID: 5638722202837982230, guid: 755c7428676e17e4ca03255b133bf989, type: 3}
+  - {fileID: 6086832979036552242, guid: 4dade0d88c75fc04aae1bcbe40f380e3, type: 3}
+  - {fileID: 7484710308885348908, guid: 583becd93f06239408b99d44883b34e1, type: 3}
+  - {fileID: 7913887020119212531, guid: e4d9edab2e04ebe438c15b8189d24289, type: 3}
   room: {fileID: 1724835110}
   rooms: []
   roomMax: 10
@@ -579,9 +583,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vida: 10
-  dashForce: 10
+  dashForce: 30
   movementSpeed: 20
+  StartDashTime: 0.1
   canMove: 0
+  canDash: 0
 --- !u!50 &736239540
 Rigidbody2D:
   serializedVersion: 4

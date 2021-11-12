@@ -146,9 +146,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1899
-        y: 2596
+        y: 2821
         width: 1136
-        height: 485
+        height: 260
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,7 +169,7 @@ TextureImporter:
         x: 1929
         y: 0
         width: 1083
-        height: 492
+        height: 257
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,9 +187,9 @@ TextureImporter:
       name: Entry_Room_2
       rect:
         serializedVersion: 2
-        x: 4401
+        x: 4638
         y: 991
-        width: 523
+        width: 286
         height: 1106
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -210,7 +210,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 1014
-        width: 527
+        width: 286
         height: 1060
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

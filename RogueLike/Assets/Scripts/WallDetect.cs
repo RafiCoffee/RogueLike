@@ -17,14 +17,31 @@ public class WallDetect : MonoBehaviour
     {
         if (templates.waitTime <= 0 && spawned == false)
         {
-            Instantiate(templates.closedWall, transform.position, Quaternion.identity, templates.room.transform);
+            switch(gameObject.tag)
+            {
+                case "WallDetectT":
+                    Instantiate(templates.closedWall[0], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case "WallDetectB":
+                    Instantiate(templates.closedWall[1], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case "WallDetectR":
+                    Instantiate(templates.closedWall[2], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+
+                case "WallDetectL":
+                    Instantiate(templates.closedWall[3], transform.position, Quaternion.identity, templates.room.transform);
+                    break;
+            }
             spawned = true;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("WallDetect"))
+        if (collision.CompareTag("WallDetectT") || collision.CompareTag("WallDetectB") || collision.CompareTag("WallDetectR") || collision.CompareTag("WallDetectL"))
         {
             Destroy(gameObject);
         }

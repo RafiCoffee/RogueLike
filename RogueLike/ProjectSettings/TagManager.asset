@@ -8,12 +8,15 @@ TagManager:
   - Spawn Point
   - Rooms
   - EntryRoom
-  - WallDetect
   - NormalRoom
   - CameraPoint
   - DungeonLimit
   - Attack
   - Bullet
+  - WallDetectT
+  - WallDetectB
+  - WallDetectR
+  - WallDetectL
   layers:
   - Default
   - TransparentFX

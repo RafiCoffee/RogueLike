@@ -6,17 +6,23 @@ public class PlayerController2DVC : MonoBehaviour
 {
     [SerializeField, Range(0, 10)] 
     public int vida = 10;
-    [SerializeField, Range(0, 10)]
-    public int dashForce = 10;
+    [SerializeField, Range(0, 100)]
+    public int dashForce = 30;
 
     Vector2 movement;
     Vector2 movementInput;
     Vector2 colision;
-    Vector2 point;
+
+    private int direction = 1;
 
     public float movementSpeed = 30f;
+    private float dashTime;
+    public float StartDashTime;
 
+    private bool oneTime = true;
     public bool canMove = false;
+    public bool canDash = false;
+    private bool isDashing = false;
 
     private Rigidbody2D playerRb2D;
     private GameObject attackCollider;
@@ -33,28 +39,86 @@ public class PlayerController2DVC : MonoBehaviour
         bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
 
         attackCollider.SetActive(false);
+
+        dashTime = StartDashTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (templates.waitTime <= 0)
+        if (templates.waitTime <= 0 && oneTime)
         {
             canMove = true;
+            canDash = true;
+            oneTime = false;
+        }
+
+        if (canDash)
+        {
+            //Dash
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                canMove = false;
+                if (direction != 0)
+                {
+                    if (dashTime > 0)
+                    {
+                        isDashing = true;
+                        if (direction == 1)
+                        {
+                            playerRb2D.velocity = Vector2.up * dashForce;
+                        }
+                        else if (direction == 2)
+                        {
+                            playerRb2D.velocity = Vector2.down * dashForce;
+                        }
+                        else if (direction == 3)
+                        {
+                            playerRb2D.velocity = Vector2.right * dashForce;
+                        }
+                        else if (direction == 4)
+                        {
+                            playerRb2D.velocity = Vector2.left * dashForce;
+                        }
+                        else if (direction == 5)
+                        {
+                            playerRb2D.velocity = new Vector2(-1, 1) * dashForce;
+                        }
+                        else if (direction == 6)
+                        {
+                            playerRb2D.velocity = Vector2.one * dashForce;
+                        }
+                        else if (direction == 7)
+                        {
+                            playerRb2D.velocity = -Vector2.one * dashForce;
+                        }
+                        else if (direction == 8)
+                        {
+                            playerRb2D.velocity = new Vector2(1, -1) * dashForce;
+                        }
+                    }
+                }
+            }
+
+            if (isDashing)
+            {
+                dashTime -= Time.deltaTime;
+                if (dashTime <= 0)
+                {
+                    direction = 0;
+                    dashTime = StartDashTime;
+                    playerRb2D.velocity = Vector2.zero;
+                    canMove = true;
+                    isDashing = false;
+                }
+            }
+            //Dash
         }
 
         if (canMove)
         {
             movementInput.x = Input.GetAxisRaw("Horizontal");
             movementInput.y = Input.GetAxisRaw("Vertical");
-
-            //Dash
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                Debug.Log("hola");
-                playerRb2D.AddForce(Vector2.up * dashForce, ForceMode2D.Impulse);
-            }
-            //Dash
 
             movement = movementInput.normalized * movementSpeed * Time.deltaTime;
 
@@ -75,36 +139,44 @@ public class PlayerController2DVC : MonoBehaviour
             //Para que el jugador mire donde anda
             if (movementInput.x < 0)
             {
+                direction = 4;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, 0.707106829f, 0.707106829f);
             }
             else if (movementInput.x > 0)
             {
+                direction = 3;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, -0.707106829f, 0.707106829f);
             }
 
             if (movementInput.y < 0)
             {
+                direction = 2;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, -1, 0);
             }
             else if (movementInput.y > 0)
             {
+                direction = 1;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, 0, 0);
             }
 
             if (movementInput.y > 0 & movementInput.x < 0)
             {
+                direction = 5;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, 0.382683426f, 0.923879564f);
             }
             else if (movementInput.y > 0 & movementInput.x > 0)
             {
+                direction = 6;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, -0.382683426f, 0.923879564f);
             }
             else if (movementInput.y < 0 & movementInput.x < 0)
             {
+                direction = 7;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, 0.923879564f, 0.382683426f);
             }
             else if (movementInput.y < 0 & movementInput.x > 0)
             {
+                direction = 8;
                 transform.GetChild(0).rotation = new Quaternion(0, 0, -0.923879564f, 0.382683426f);
             }
             //Para que el jugador mire donde anda
@@ -122,7 +194,10 @@ public class PlayerController2DVC : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerRb2D.MovePosition(playerRb2D.position + movement);
+        if (canMove)
+        {
+            playerRb2D.MovePosition(playerRb2D.position + movement);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
