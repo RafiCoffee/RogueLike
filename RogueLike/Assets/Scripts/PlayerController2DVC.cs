@@ -18,12 +18,14 @@ public class PlayerController2DVC : MonoBehaviour
 
     public int room;
     private int direction = 1;
+    public int ammo = 10;
 
     public float movementSpeed = 30f;
     private float dashTime;
     public float StartDashTime;
     public float dashCoolDown = 2;
     private float dashTimer = 0;
+    public float bulletCooldown = 0.5f;
 
     private bool oneTime = true;
     public bool canMove = false;
@@ -42,7 +44,8 @@ public class PlayerController2DVC : MonoBehaviour
     private BulletPool bulletPool;
     private AddRooms addRoomScript;
 
-    private Stopwatch timer = new Stopwatch();
+    private Stopwatch timerDash = new Stopwatch();
+    private Stopwatch timerBullet = new Stopwatch();
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +60,8 @@ public class PlayerController2DVC : MonoBehaviour
 
         dashTime = StartDashTime;
 
-        timer.Start();
+        timerDash.Start();
+        timerBullet.Start();
     }
 
     // Update is called once per frame
@@ -78,7 +82,7 @@ public class PlayerController2DVC : MonoBehaviour
         if (canDash)
         {
             //Dash
-            if (Input.GetKeyDown(KeyCode.LeftShift) & timer.ElapsedMilliseconds / 1000 > dashCoolDown)
+            if (Input.GetKeyDown(KeyCode.LeftShift) & timerDash.ElapsedMilliseconds / 1000 > dashCoolDown)
             {
                 canMove = false;
                 if (direction != 0)
@@ -133,7 +137,7 @@ public class PlayerController2DVC : MonoBehaviour
                     canMove = true;
                     isDashing = false;
                     dashTimer = 0;
-                    timer.Restart();
+                    timerDash.Restart();
                 }
             }
             //Dash
@@ -154,7 +158,7 @@ public class PlayerController2DVC : MonoBehaviour
             //Ataque
 
             //Disparar
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && timerBullet.ElapsedMilliseconds / 1000 > bulletCooldown && ammo != 0)
             {
                 Shoot();
             }
@@ -241,6 +245,9 @@ public class PlayerController2DVC : MonoBehaviour
         bullet.SetActive(true);
         bullet.transform.position = transform.GetChild(1).GetChild(1).position;
         bullet.transform.rotation = transform.GetChild(1).GetChild(1).rotation;
+
+        ammo--;
+        timerBullet.Restart();
     }
 
     IEnumerator Attack()
