@@ -199,15 +199,6 @@ public class PlayerController2DVC : MonoBehaviour
                 transform.rotation = new Quaternion(0, 0, -0.923879564f, 0.382683426f);
             }
             //Para que el jugador mire donde anda
-
-            //Para que la cabeza mire donde apunte
-            float zCameraDepth = -Camera.main.transform.position.z;
-            Vector3 MouseScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, zCameraDepth);
-            Vector3 MouseWorldPoint = Camera.main.ScreenToWorldPoint(MouseScreenPoint);
-            Vector3 lookAtDirection = MouseWorldPoint - transform.GetChild(1).position;
-
-            transform.GetChild(1).up = lookAtDirection;
-            //Para que la cabeza mire donde apunte
         }
     }
 

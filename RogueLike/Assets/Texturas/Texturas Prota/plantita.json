@@ -1,0 +1,54 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "Common Parameters": {
+                    "ao_intensity": 0.75,
+                    "emissive_intensity": 1,
+                    "horizonFade": 1.2999999523162842,
+                    "nbSamples": 16
+                },
+                "Parallax Occlusion Mapping": {
+                    "maxPOMSamples": 16,
+                    "minPOMSamples": 4,
+                    "pomStrength": 1,
+                    "usePOM": false
+                }
+            },
+            "shader": "pbr-metal-rough-with-alpha-blending",
+            "shaderInstance": "Main shader"
+        }
+    },
+    "texturesets": {
+        "brazos y mas": {
+            "shader": "Main shader"
+        },
+        "cabeza": {
+            "shader": "Main shader"
+        },
+        "cuerpo": {
+            "shader": "Main shader"
+        },
+        "engranaje pequeño": {
+            "shader": "Main shader"
+        },
+        "engranajes grande": {
+            "shader": "Main shader"
+        },
+        "joints": {
+            "shader": "Main shader"
+        },
+        "las patas sup": {
+            "shader": "Main shader"
+        },
+        "patas inf": {
+            "shader": "Main shader"
+        },
+        "patas mid": {
+            "shader": "Main shader"
+        }
+    }
+}

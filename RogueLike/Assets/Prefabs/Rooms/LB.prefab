@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5855369216480007577}
   - component: {fileID: 1714379535365405007}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3243828694327880408}
   - component: {fileID: 7865701314759527378}
   - component: {fileID: 6766418594116622179}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallDetect
   m_TagString: WallDetectL
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 2108208468713196982}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.54375, y: 0.5, z: 1}
   m_Children:
   - {fileID: 9092769230506176920}
   - {fileID: 5716535968252135483}
@@ -419,7 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2886525222746297352}
   - component: {fileID: 1880897085719025018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2886525223063973964}
   - component: {fileID: 5943728457168719340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2886525223345477162}
   - component: {fileID: 3297042258330185141}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2886525224219548180}
   - component: {fileID: 4056441650938462792}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2886525224662994139}
   - component: {fileID: 1024358847243590391}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +830,7 @@ GameObject:
   - component: {fileID: 6509133588903752866}
   - component: {fileID: 1802315863175682425}
   - component: {fileID: 1094578395905512160}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallDetect 2
   m_TagString: WallDetectB
   m_Icon: {fileID: 0}

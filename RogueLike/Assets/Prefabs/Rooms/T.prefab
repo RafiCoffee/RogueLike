@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1918481838350679828}
   - component: {fileID: 6984366135033250484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1918481838603459408}
   - component: {fileID: 2921542701991680546}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1918481839202670962}
   - component: {fileID: 2256404585297486573}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7225107374097858950}
   - component: {fileID: 5195002816310772445}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7193195504942750401}
   - component: {fileID: 2691918300046669335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pared 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 3445519910084412142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.54375, y: 0.5, z: 1}
   m_Children:
   - {fileID: 6902861104623741912}
   - {fileID: 3445519909096365393}
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 7549221513101786106}
   - component: {fileID: 3139627753337493025}
   - component: {fileID: 4440996960039804344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallDetect
   m_TagString: WallDetectT
   m_Icon: {fileID: 0}
