@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AddRooms : MonoBehaviour
 {
+    public int room;
+
     private RoomTemplates templates;
 
     void Start()
@@ -11,5 +13,7 @@ public class AddRooms : MonoBehaviour
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
 
         templates.rooms.Add(this.gameObject);
+
+        room = templates.rooms.Count;
     }
 }

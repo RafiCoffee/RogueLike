@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.124054104, g: 0.12944815, b: 0.11456759, a: 1}
+  m_IndirectSpecularColor: {r: 0.1240543, g: 0.12944846, b: 0.11456779, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -795,6 +795,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1060118305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4913260427794724279, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+  m_PrefabInstance: {fileID: 7309971403062021306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1163934917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1100,7 @@ GameObject:
   - component: {fileID: 1720315895}
   - component: {fileID: 1720315894}
   - component: {fileID: 1720315893}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DungeonLimit
   m_TagString: DungeonLimit
   m_Icon: {fileID: 0}
@@ -1271,6 +1276,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 2395345096569965915, guid: 62691678d154b6c4b80301b333cea06b, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2441862729676500061, guid: 62691678d154b6c4b80301b333cea06b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -10
@@ -1322,6 +1331,10 @@ PrefabInstance:
     - target: {fileID: 2913682386143471725, guid: 62691678d154b6c4b80301b333cea06b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297770736932924081, guid: 62691678d154b6c4b80301b333cea06b, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6745552698200305279, guid: 62691678d154b6c4b80301b333cea06b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1394,12 +1407,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7309971403470836489, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: visual
+      value: 
+      objectReference: {fileID: 1060118305}
+    - target: {fileID: 7309971403470836489, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
       propertyPath: dashCoolDown
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7309971403470836489, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
       propertyPath: movementSpeed
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7309971403470836490, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
       propertyPath: m_Name
@@ -1408,6 +1425,30 @@ PrefabInstance:
     - target: {fileID: 7309971403470836490, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7579654284689315983, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490498249350666745, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490498249350666745, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490498249350666745, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490498249350666745, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490498249350666745, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -251530465
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}

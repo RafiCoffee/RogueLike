@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -2177383706559564504}
   m_Layer: 10
   m_Name: Enemigo
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620073ad23db18a44abd45d44f8f6f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  visionRadius: 5
+  vida: 10
+  enemyRoom: 0
+  dashForce: 30
   isMoving: 0
   isAtacking: 0
+  visual: {fileID: 3925763951828097257}

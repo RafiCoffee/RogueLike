@@ -18,6 +18,7 @@ TagManager:
   - WallDetectR
   - WallDetectL
   - BossRoom
+  - EnemyWall
   layers:
   - Default
   - TransparentFX
@@ -30,9 +31,9 @@ TagManager:
   - Bullet
   - WallDetect
   - Enemy
-  - 
-  - 
-  - 
+  - EnemyWall
+  - Destroyer
+  - Room
   - 
   - 
   - 

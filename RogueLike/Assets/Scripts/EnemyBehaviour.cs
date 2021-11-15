@@ -5,130 +5,107 @@ using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    private int rutina;
-    public int speed;
-    private int direction;
-    private int hola;
+    [SerializeField, Range(0, 10)]
+    public int vida = 10;
 
-    private float cronometro;
-    public float visionRadius;
+    public int enemyRoom;
+    public int dashForce;
 
     public bool isMoving = false;
     public bool isAtacking;
+    private bool invencible = false;
 
     private GameObject target;
-    private GameObject rango;
+    public GameObject visual;
 
     private Vector2 initialPosition;
+    private Vector2 followPlayer;
+    private Vector2 colision;
 
+    private Rigidbody2D enemyRb;
+
+    private AddRooms addRoomsScript;
+    private PlayerController2DVC playerScript;
     // Start is called before the first frame update
     void Start()
     {
         initialPosition = transform.position;
 
+        enemyRb = GetComponent<Rigidbody2D>();
         target = GameObject.Find("Jugador2DVC");
+
+        addRoomsScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
+        playerScript = GameObject.Find("Jugador2DVC").GetComponent<PlayerController2DVC>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Comportamientos();
-
-        /*if (isWatchingPlayer == false)
-        {
-            isWatchingPlayer = true;
-        }
-        else
-        {
-            isWatchingPlayer = false;
-        }*/
+        followPlayer = target.transform.position - transform.position;
     }
 
     private void FixedUpdate()
     {
-        if (isMoving)
+        if (enemyRoom == playerScript.room)
         {
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
-        }
-    }
-
-    public void Comportamientos()
-    {
-        if (Mathf.Abs(transform.position.x - target.transform.position.x) > visionRadius || Mathf.Abs(transform.position.y - target.transform.position.y) > visionRadius)
-        {
-            cronometro += Time.deltaTime;
-            if (cronometro >= 3)
+            StartCoroutine(Wait());
+            if (isMoving)
             {
-                rutina = Random.Range(0, 2);
-                cronometro = 0;
-            }
-
-            switch (rutina)
-            {
-                case 0:
-                    isMoving = false;
-                    break;
-
-                case 1:
-                    direction = Random.Range(0, 4);
-                    rutina++;
-                    break;
-
-                case 2:
-
-                    switch (direction)
-                    {
-                        case 0:
-                            transform.rotation = Quaternion.Euler(0, 0, 0);
-                            isMoving = true;
-                            break;
-
-                        case 1:
-                            transform.rotation = Quaternion.Euler(0, 0, 90);
-                            isMoving = true;
-                            break;
-
-                        case 2:
-                            transform.rotation = Quaternion.Euler(0, 0, 180);
-                            isMoving = true;
-                            break;
-
-                        case 3:
-                            transform.rotation = Quaternion.Euler(0, 0, 270);
-                            isMoving = true;
-                            break;
-                    }
-
-                    break;
+                enemyRb.MovePosition((Vector2)transform.position + (followPlayer / 2 * Time.deltaTime));
             }
         }
         else
         {
-            if (transform.position.x < target.transform.position.x)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 270);
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 90);
-            }
-
-            if (transform.position.x == target.transform.position.x || transform.position.y < target.transform.position.y)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (transform.position.x == target.transform.position.x || transform.position.y > target.transform.position.y)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 180);
-            }
+            isMoving = false;
+            enemyRb.MovePosition(initialPosition);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.layer == 6 || collision.collider.gameObject.layer == 9 || collision.collider.gameObject.layer == 10)
+        if (collision.collider.CompareTag("Attack") && invencible == false || collision.collider.CompareTag("Bullet") && invencible == false)
         {
-            rutina = 1;
+            colision = collision.GetContact(0).normal;
+            invencible = true;
+            StartCoroutine(Retroceso());
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 13)
+        {
+            addRoomsScript = collision.gameObject.GetComponent<AddRooms>();
+
+            enemyRoom = addRoomsScript.room;
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.8f);
+        isMoving = true;
+    }
+
+    IEnumerator Retroceso()
+    {
+        isMoving = false;
+        enemyRb.velocity = colision * dashForce;
+        yield return new WaitForSeconds(0.15f);
+        enemyRb.velocity = Vector2.zero;
+        isMoving = true;
+        StartCoroutine(Invencible());
+    }
+
+    IEnumerator Invencible()
+    {
+        visual.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        visual.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        visual.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        visual.SetActive(true);
+        invencible = false;
     }
 }

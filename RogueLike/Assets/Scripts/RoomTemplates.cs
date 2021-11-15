@@ -33,7 +33,7 @@ public class RoomTemplates : MonoBehaviour
         {
             if (enemyRoomsSet == false)
             {
-                enemyRooms = Random.Range(1, rooms.Count - 4);
+                enemyRooms = Random.Range(2, rooms.Count - 4);
                 enemyRoomsSet = true;
             }
 
@@ -46,7 +46,7 @@ public class RoomTemplates : MonoBehaviour
                     {
                         if (i == 0)
                         {
-                            i = 0;
+                            i = 1;
                         }
                         else
                         {

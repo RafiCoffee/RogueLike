@@ -16,6 +16,7 @@ public class PlayerController2DVC : MonoBehaviour
     Vector2 movementInput;
     Vector2 colision;
 
+    public int room;
     private int direction = 1;
 
     public float movementSpeed = 30f;
@@ -28,15 +29,18 @@ public class PlayerController2DVC : MonoBehaviour
     public bool canMove = false;
     public bool canDash = false;
     private bool isDashing = false;
+    private bool invencible = false;
 
     private Rigidbody2D playerRb2D;
     private Slider dashSlider;
 
     private GameObject attackCollider;
     private GameObject bullet;
+    public GameObject visual;
 
     private RoomTemplates templates;
     private BulletPool bulletPool;
+    private AddRooms addRoomScript;
 
     private Stopwatch timer = new Stopwatch();
     // Start is called before the first frame update
@@ -47,6 +51,7 @@ public class PlayerController2DVC : MonoBehaviour
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
         dashSlider = GameObject.Find("Dash").GetComponent<Slider>();
+        addRoomScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
 
         attackCollider.SetActive(false);
 
@@ -212,10 +217,21 @@ public class PlayerController2DVC : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
+        if (collision.collider.CompareTag("Enemy") && invencible == false)
         {
             colision = collision.GetContact(0).normal;
-            //Debug.Log(colision);
+            invencible = true;
+            StartCoroutine(Retroceso());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 13)
+        {
+            addRoomScript = collision.gameObject.GetComponent<AddRooms>();
+
+            room = addRoomScript.room;
         }
     }
 
@@ -223,14 +239,38 @@ public class PlayerController2DVC : MonoBehaviour
     {
         bullet = bulletPool.GetPooledObject();
         bullet.SetActive(true);
-        bullet.transform.position = transform.GetChild(1).position;
-        bullet.transform.rotation = transform.GetChild(1).rotation;
+        bullet.transform.position = transform.GetChild(1).GetChild(1).position;
+        bullet.transform.rotation = transform.GetChild(1).GetChild(1).rotation;
     }
 
     IEnumerator Attack()
     {
+        invencible = true;
         attackCollider.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         attackCollider.SetActive(false);
+        invencible = false;
+    }
+
+    IEnumerator Retroceso()
+    {
+        canMove = false;
+        playerRb2D.velocity = colision * dashForce;
+        yield return new WaitForSeconds(0.15f);
+        playerRb2D.velocity = Vector2.zero;
+        canMove = true;
+        StartCoroutine(Invencible());
+    }
+
+    IEnumerator Invencible()
+    {
+        visual.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        visual.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        visual.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        visual.SetActive(true);
+        invencible = false;
     }
 }
