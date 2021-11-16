@@ -23,7 +23,7 @@ public class PlayerController2DVC : MonoBehaviour
     public float movementSpeed = 30f;
     private float dashTime;
     public float StartDashTime;
-    public float dashCoolDown = 2;
+    public float dashCoolDown = 1.5f;
     private float dashTimer = 0;
     public float bulletCooldown = 0.5f;
 
@@ -168,44 +168,44 @@ public class PlayerController2DVC : MonoBehaviour
             if (movementInput.x < 0)
             {
                 direction = 4;
-                transform.rotation = new Quaternion(0, 0, 0.707106829f, 0.707106829f);
+                transform.rotation = Quaternion.Euler(0, 0, 270);
             }
             else if (movementInput.x > 0)
             {
                 direction = 3;
-                transform.rotation = new Quaternion(0, 0, -0.707106829f, 0.707106829f);
+                transform.rotation = Quaternion.Euler(0, 0, 90);
             }
 
             if (movementInput.y < 0)
             {
                 direction = 2;
-                transform.rotation = new Quaternion(0, 0, -1, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 180);
             }
             else if (movementInput.y > 0)
             {
                 direction = 1;
-                transform.rotation = new Quaternion(0, 0, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 
             if (movementInput.y > 0 & movementInput.x < 0)
             {
                 direction = 5;
-                transform.rotation = new Quaternion(0, 0, 0.382683426f, 0.923879564f);
+                transform.rotation = Quaternion.Euler(0, 0, 315);
             }
             else if (movementInput.y > 0 & movementInput.x > 0)
             {
                 direction = 6;
-                transform.rotation = new Quaternion(0, 0, -0.382683426f, 0.923879564f);
+                transform.rotation = Quaternion.Euler(0, 0, 45);
             }
             else if (movementInput.y < 0 & movementInput.x < 0)
             {
                 direction = 7;
-                transform.rotation = new Quaternion(0, 0, 0.923879564f, 0.382683426f);
+                transform.rotation = Quaternion.Euler(0, 0, 225);
             }
             else if (movementInput.y < 0 & movementInput.x > 0)
             {
                 direction = 8;
-                transform.rotation = new Quaternion(0, 0, -0.923879564f, 0.382683426f);
+                transform.rotation = Quaternion.Euler(0, 0, 135);
             }
             //Para que el jugador mire donde anda
         }
@@ -243,8 +243,8 @@ public class PlayerController2DVC : MonoBehaviour
     {
         bullet = bulletPool.GetPooledObject();
         bullet.SetActive(true);
-        bullet.transform.position = transform.GetChild(1).GetChild(1).position;
-        bullet.transform.rotation = transform.GetChild(1).GetChild(1).rotation;
+        bullet.transform.position = transform.GetChild(1).GetChild(1).GetChild(0).position;
+        bullet.transform.rotation = transform.GetChild(1).GetChild(1).GetChild(0).rotation;
 
         ammo--;
         timerBullet.Restart();

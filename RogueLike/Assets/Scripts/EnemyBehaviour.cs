@@ -42,6 +42,23 @@ public class EnemyBehaviour : MonoBehaviour
     void Update()
     {
         followPlayer = target.transform.position - transform.position;
+
+        if (followPlayer.x < 0 && followPlayer.x < followPlayer.y)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 270);
+        }
+        else if (followPlayer.x > 0 && followPlayer.x > followPlayer.y)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        else if (followPlayer.y < 0 && followPlayer.y < followPlayer.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (followPlayer.y > 0 && followPlayer.y > followPlayer.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
     }
 
     private void FixedUpdate()

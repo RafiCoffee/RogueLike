@@ -6,7 +6,7 @@ public class Destroyer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EntryRoom") == false && collision.CompareTag("Player") == false && collision.CompareTag("DungeonLimit") == false && collision.CompareTag("Bullet"))
+        if (collision.CompareTag("EntryRoom") == false && collision.CompareTag("Player") == false && collision.CompareTag("DungeonLimit") == false && collision.CompareTag("Bullet") == false)
         {
             Destroy(collision.gameObject);
         }

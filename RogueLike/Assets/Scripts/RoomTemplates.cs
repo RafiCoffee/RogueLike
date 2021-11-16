@@ -27,10 +27,20 @@ public class RoomTemplates : MonoBehaviour
     private bool enemyRoomsSet = false;
     private int spawnRoom;
 
+    private Vector2 spawnBossRoom;
     void Update()
     {
         if (waitTime <= 0 && spawnedEnemies == false)
         {
+            /*spawnBossRoom = rooms[rooms.Count - 1].transform.position;
+            Destroy(rooms[rooms.Count - 1]);
+
+            for (int i = 0; i < 4 + 1; i++)
+            {
+                Instantiate(bossRooms[i], spawnBossRoom, Quaternion.identity);
+                if
+            }*/
+
             if (enemyRoomsSet == false)
             {
                 enemyRooms = Random.Range(2, rooms.Count - 4);
