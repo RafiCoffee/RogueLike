@@ -190,6 +190,7 @@ MonoBehaviour:
   waitTime: 2
   boss: {fileID: 6539530784317358980, guid: 21271feee4fc7984dbc7c4c7d88af646, type: 3}
   spawnEnemies: {fileID: 8442918736608054729, guid: 4300a2180c8cc694aa6f2ec86eeb7318, type: 3}
+  bossRoom: {fileID: 0}
   enemyRooms: 0
 --- !u!4 &408286
 Transform:
@@ -203,7 +204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &163035722
 GameObject:
@@ -1188,7 +1189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7309971403470836488, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7309971403470836488, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
       propertyPath: m_LocalPosition.x

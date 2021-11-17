@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 460217067984174996}
   - component: {fileID: 460217067984174998}
   - component: {fileID: 4322901258800497566}
+  - component: {fileID: 4477808814939895682}
   m_Layer: 0
   m_Name: T(Boss)
   m_TagString: BossRoom
@@ -127,6 +128,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eba91d2e76494d43804364fe190c8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: 0
+--- !u!114 &4477808814939895682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460217067984174994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d2c28405812ae4f805eaf930422ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &460217068976021546
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +244,6 @@ GameObject:
   - component: {fileID: 8536596717094557348}
   - component: {fileID: 337264231166365030}
   - component: {fileID: 6311496960684584648}
-  - component: {fileID: 6060321459098119737}
   m_Layer: 0
   m_Name: Spawn Point
   m_TagString: Spawn Point
@@ -299,20 +312,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6060321459098119737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821103274818726699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca08b3fdf43ccec41a78a4b341555275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openingDirection: 1
-  waitTime: 4
 --- !u!1 &3687366136874435179
 GameObject:
   m_ObjectHideFlags: 0

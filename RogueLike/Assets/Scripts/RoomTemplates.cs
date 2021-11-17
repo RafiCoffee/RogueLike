@@ -22,6 +22,7 @@ public class RoomTemplates : MonoBehaviour
     private bool spawnedEnemies = false;
     public GameObject boss;
     public GameObject spawnEnemies;
+    public GameObject bossRoom;
 
     public int enemyRooms;
     private bool enemyRoomsSet = false;
@@ -34,11 +35,11 @@ public class RoomTemplates : MonoBehaviour
         {
             /*spawnBossRoom = rooms[rooms.Count - 1].transform.position;
             Destroy(rooms[rooms.Count - 1]);
+            rooms.Remove(rooms[rooms.Count - 1]);
 
             for (int i = 0; i < 4 + 1; i++)
             {
                 Instantiate(bossRooms[i], spawnBossRoom, Quaternion.identity);
-                if
             }*/
 
             if (enemyRoomsSet == false)
