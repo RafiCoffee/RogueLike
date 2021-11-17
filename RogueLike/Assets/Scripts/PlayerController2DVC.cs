@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController2DVC : MonoBehaviour
 {
@@ -44,6 +46,8 @@ public class PlayerController2DVC : MonoBehaviour
     private BulletPool bulletPool;
     private AddRooms addRoomScript;
 
+    public TextMeshProUGUI ammoText;
+
     private Stopwatch timerDash = new Stopwatch();
     private Stopwatch timerBullet = new Stopwatch();
     // Start is called before the first frame update
@@ -51,10 +55,14 @@ public class PlayerController2DVC : MonoBehaviour
     {
         playerRb2D = GetComponent<Rigidbody2D>();
         attackCollider = GameObject.Find("AttackCollider");
-        templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
         dashSlider = GameObject.Find("Dash").GetComponent<Slider>();
-        addRoomScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
+
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+            addRoomScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
+        }
 
         attackCollider.SetActive(false);
 
@@ -67,8 +75,16 @@ public class PlayerController2DVC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (templates.waitTime <= 0 && oneTime)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (templates.waitTime <= 0 && oneTime)
+            {
+                canMove = true;
+                canDash = true;
+                oneTime = false;
+            }
+        }
+        else
         {
             canMove = true;
             canDash = true;
@@ -168,12 +184,12 @@ public class PlayerController2DVC : MonoBehaviour
             if (movementInput.x < 0)
             {
                 direction = 4;
-                transform.rotation = Quaternion.Euler(0, 0, 270);
+                transform.rotation = Quaternion.Euler(0, 0, 90);
             }
             else if (movementInput.x > 0)
             {
                 direction = 3;
-                transform.rotation = Quaternion.Euler(0, 0, 90);
+                transform.rotation = Quaternion.Euler(0, 0, 270);
             }
 
             if (movementInput.y < 0)
@@ -190,24 +206,28 @@ public class PlayerController2DVC : MonoBehaviour
             if (movementInput.y > 0 & movementInput.x < 0)
             {
                 direction = 5;
-                transform.rotation = Quaternion.Euler(0, 0, 315);
+                transform.rotation = Quaternion.Euler(0, 0, 45);
             }
             else if (movementInput.y > 0 & movementInput.x > 0)
             {
                 direction = 6;
-                transform.rotation = Quaternion.Euler(0, 0, 45);
+                transform.rotation = Quaternion.Euler(0, 0, 315);
             }
             else if (movementInput.y < 0 & movementInput.x < 0)
             {
                 direction = 7;
-                transform.rotation = Quaternion.Euler(0, 0, 225);
+                transform.rotation = Quaternion.Euler(0, 0, 135);
             }
             else if (movementInput.y < 0 & movementInput.x > 0)
             {
                 direction = 8;
-                transform.rotation = Quaternion.Euler(0, 0, 135);
+                transform.rotation = Quaternion.Euler(0, 0, 225);
             }
             //Para que el jugador mire donde anda
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            ammoText.text = ammo.ToString();
         }
     }
 

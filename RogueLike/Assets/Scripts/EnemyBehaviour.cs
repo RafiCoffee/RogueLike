@@ -13,13 +13,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     public bool isMoving = false;
     public bool isAtacking;
-    private bool invencible = false;
+    public bool isBoss = false;
+    public bool invencible = false;
 
     private GameObject target;
     public GameObject visual;
 
     private Vector2 initialPosition;
-    private Vector2 followPlayer;
+    public Vector2 followPlayer;
     private Vector2 colision;
 
     private Rigidbody2D enemyRb;
@@ -43,22 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         followPlayer = target.transform.position - transform.position;
 
-        if (followPlayer.x < 0 && followPlayer.x < followPlayer.y)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 270);
-        }
-        else if (followPlayer.x > 0 && followPlayer.x > followPlayer.y)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-        }
-        else if (followPlayer.y < 0 && followPlayer.y < followPlayer.x)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (followPlayer.y > 0 && followPlayer.y > followPlayer.x)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-        }
+        transform.up = followPlayer;
     }
 
     private void FixedUpdate()
@@ -68,7 +54,7 @@ public class EnemyBehaviour : MonoBehaviour
             StartCoroutine(Wait());
             if (isMoving)
             {
-                enemyRb.MovePosition((Vector2)transform.position + (followPlayer / 2 * Time.deltaTime));
+                enemyRb.MovePosition((Vector2)transform.position + (followPlayer / 1.5f * Time.deltaTime));
             }
         }
         else
