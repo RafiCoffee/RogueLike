@@ -22,7 +22,6 @@ public class RoomTemplates : MonoBehaviour
     private bool spawnedEnemies = false;
     public GameObject boss;
     public GameObject spawnEnemies;
-    public GameObject bossRoom;
 
     public int enemyRooms;
     private bool enemyRoomsSet = false;

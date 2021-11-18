@@ -21,7 +21,7 @@ public class AddRooms : MonoBehaviour
 
     void Update()
     {
-        if (templates.waitTime <= 0 && room == templates.rooms.Count)
+        if (templates.waitTime <= 0 && room == templates.rooms.Count - 1)
         {
             wallDetectScript = GetComponentInChildren<WallDetect>();
             direccion = wallDetectScript.direccion;

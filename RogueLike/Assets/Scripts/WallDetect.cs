@@ -47,27 +47,34 @@ public class WallDetect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.gameObject.tag)
+        if (collision.CompareTag("WallDetectT") || collision.CompareTag("WallDetectB") || collision.CompareTag("WallDetectR") || collision.CompareTag("WallDetectL"))
         {
-            case "WallDetectT":
-                spawned = true;
-                direccion = 0;
-                break;
+            switch (collision.gameObject.tag)
+            {
+                case "WallDetectT":
+                    spawned = true;
+                    direccion = 0;
+                    break;
 
-            case "WallDetectB":
-                spawned = true;
-                direccion = 3;
-                break;
+                case "WallDetectB":
+                    spawned = true;
+                    direccion = 3;
+                    break;
 
-            case "WallDetectR":
-                spawned = true;
-                direccion = 1;
-                break;
+                case "WallDetectR":
+                    spawned = true;
+                    direccion = 1;
+                    break;
 
-            case "WallDetectL":
-                spawned = true;
-                direccion = 2;
-                break;
+                case "WallDetectL":
+                    spawned = true;
+                    direccion = 2;
+                    break;
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

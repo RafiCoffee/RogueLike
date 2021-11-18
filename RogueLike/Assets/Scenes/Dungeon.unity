@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.124054104, g: 0.12944815, b: 0.11456759, a: 1}
+  m_IndirectSpecularColor: {r: 0.1240543, g: 0.12944846, b: 0.11456779, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -188,9 +188,8 @@ MonoBehaviour:
   roomMax: 10
   roomMin: 6
   waitTime: 2
-  boss: {fileID: 5323118701050647038, guid: 21271feee4fc7984dbc7c4c7d88af646, type: 3}
+  boss: {fileID: 3215203290592028501, guid: 21271feee4fc7984dbc7c4c7d88af646, type: 3}
   spawnEnemies: {fileID: 8442918736608054729, guid: 4300a2180c8cc694aa6f2ec86eeb7318, type: 3}
-  bossRoom: {fileID: 0}
   enemyRooms: 0
 --- !u!4 &408286
 Transform:
@@ -1128,6 +1127,10 @@ PrefabInstance:
       propertyPath: ammoText
       value: 
       objectReference: {fileID: 1932454658}
+    - target: {fileID: 7309971403470836489, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
+      propertyPath: dashForce
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7309971403470836489, guid: 4cd654260f5f4e84e974cc0f238721c4, type: 3}
       propertyPath: dashCoolDown
       value: 1.5

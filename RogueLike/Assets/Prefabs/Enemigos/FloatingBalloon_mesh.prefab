@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &325575243229684126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6846964468629736698}
+  - component: {fileID: 5108985120772308882}
+  m_Layer: 0
+  m_Name: Helice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6846964468629736698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325575243229684126}
+  m_LocalRotation: {x: 0.8191521, y: -0, z: -0, w: 0.57357645}
+  m_LocalPosition: {x: -0.4309089, y: -0.063643515, z: -0.7052058}
+  m_LocalScale: {x: 0.90909094, y: 0.9090905, z: 0.9090905}
+  m_Children:
+  - {fileID: 9078674197053325180}
+  m_Father: {fileID: 9008075526974722531}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5108985120772308882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325575243229684126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f29a81510ffd884c9fd892d5632ab78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2318427354107652345
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,12 +150,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3452392012915563929}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.4317964, y: 0, z: -0.029163675}
-  m_LocalScale: {x: 1, y: 1.3801321, z: 1}
+  m_LocalRotation: {x: -0.9848078, y: -0, z: -0, w: -0.17364816}
+  m_LocalPosition: {x: -0.0009760678, y: 0.6748553, z: -0.3201283}
+  m_LocalScale: {x: 1.1, y: 1.5181454, z: 1.1000003}
   m_Children: []
-  m_Father: {fileID: 9008075526974722531}
-  m_RootOrder: 1
+  m_Father: {fileID: 6846964468629736698}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6211708675966336298
 MeshFilter:
@@ -190,7 +234,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5493994978620298033}
-  - {fileID: 9078674197053325180}
+  - {fileID: 6846964468629736698}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -110, y: 0, z: 0}

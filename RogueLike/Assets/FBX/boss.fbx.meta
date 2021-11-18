@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 57b60749c06605f42bc7dc0112c1b973
+guid: 6bf519c7ceae878449487cc228a972de
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -18,7 +21,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Character1_RightForeArm' has translation
+      animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -30,7 +36,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -77,7 +112,112 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Test_export_02_reborn(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: body
+      parentName: Test_export_02_reborn(Clone)
+      position: {x: 0.01918321, y: 1.8487307, z: 0.0032037531}
+      rotation: {x: -0.07230824, y: 0, z: -0, w: 0.99738234}
+      scale: {x: 1.184237, y: 1.184237, z: 1.184237}
+    - name: Character1_Reference
+      parentName: Test_export_02_reborn(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.39370102, y: 0.39370102, z: 0.39370102}
+    - name: Character1_Hips
+      parentName: Character1_Reference
+      position: {x: 0.00000009462232, y: 3.133265, z: -0.51226413}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Character1_Spine
+      parentName: Character1_Hips
+      position: {x: -0, y: 1.560135, z: -9.0238926e-17}
+      rotation: {x: -0.0000011931555, y: 0.16327117, z: 0.00000019745751, w: 0.98658127}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Character1_RightArm
+      parentName: Character1_Spine
+      position: {x: 1.7747986, y: -0.3439701, z: -0.2070264}
+      rotation: {x: -0.24501476, y: 0.23731913, z: 0.631452, w: 0.6963589}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Character1_RightForeArm
+      parentName: Character1_RightArm
+      position: {x: -0.013768378, y: -1.6042103, z: 0.25309289}
+      rotation: {x: -0.000008953137, y: 0.000012210452, z: 0.00031875985, w: 0.99999994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_RightHand
+      parentName: Character1_RightForeArm
+      position: {x: -0.037922684, y: -1.1727164, z: 0.1687116}
+      rotation: {x: -0.000009799281, y: -0.0000005387778, z: -0.0029761826, w: 0.9999956}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_Neck
+      parentName: Character1_Spine
+      position: {x: -0.0000000031611262, y: 0.42928967, z: 0.0000000137752725}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Character1_Head
+      parentName: Character1_Neck
+      position: {x: -0.000000005384649, y: 0.5325268, z: 0.000000006849931}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Character1_LeftArm
+      parentName: Character1_Spine
+      position: {x: -1.7748002, y: -0.3439701, z: -0.2070264}
+      rotation: {x: 0.11474473, y: -0.10801263, z: -0.69103676, w: 0.70543265}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Character1_LeftForeArm
+      parentName: Character1_LeftArm
+      position: {x: 0.014043522, y: -1.6042067, z: 0.2530967}
+      rotation: {x: -0.000010208018, y: 0.000007700638, z: -0.00010346042, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_LeftHand
+      parentName: Character1_LeftForeArm
+      position: {x: 0.037469514, y: -1.1727318, z: 0.16871145}
+      rotation: {x: -0.000009923513, y: -0.000000009381179, z: 0.0009453481, w: 0.9999996}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_LeftUpLeg
+      parentName: Character1_Hips
+      position: {x: -0.7762991, y: -0.36692256, z: 0.000000048446655}
+      rotation: {x: -0.00042521892, y: 0.0000053568506, z: 0.0000017583369, w: 0.99999994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_LeftLeg
+      parentName: Character1_LeftUpLeg
+      position: {x: -0.022596072, y: -1.0922893, z: 0.00007401879}
+      rotation: {x: 0.0009401994, y: -0.000002143184, z: -0.0000033326796, w: 0.9999996}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_LeftFoot
+      parentName: Character1_LeftLeg
+      position: {x: 0.0000001611244, y: -0.970779, z: -0.0000035141115}
+      rotation: {x: -0.0005149804, y: -0.0000032138998, z: 0.0000015784683, w: 0.9999999}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_LeftToeBase
+      parentName: Character1_LeftFoot
+      position: {x: -0.00000029067945, y: -0.6227017, z: 0.49357408}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_RightUpLeg
+      parentName: Character1_Hips
+      position: {x: 0.776299, y: -0.36692256, z: -0.00000009689331}
+      rotation: {x: 0.00018642934, y: -0.020215604, z: -0.0000026226041, w: 0.9997956}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_RightLeg
+      parentName: Character1_RightUpLeg
+      position: {x: 0.022596236, y: -1.0922899, z: -0.000029655412}
+      rotation: {x: 0.00005752652, y: 0.0121294595, z: 0.0000044285853, w: 0.99992645}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_RightFoot
+      parentName: Character1_RightLeg
+      position: {x: -0.0000000824955, y: -0.9707788, z: -0.0000032704716}
+      rotation: {x: -0.00024387265, y: 0.008087133, z: -0.00000522949, w: 0.9999673}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Character1_RightToeBase
+      parentName: Character1_RightFoot
+      position: {x: 0.00000038757324, y: -0.6227017, z: 0.49357393}
+      rotation: {x: 0, y: -0.000041891268, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -88,11 +228,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
