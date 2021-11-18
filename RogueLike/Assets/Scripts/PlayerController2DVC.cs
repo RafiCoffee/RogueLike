@@ -13,6 +13,10 @@ public class PlayerController2DVC : MonoBehaviour
     public int vida = 10;
     [SerializeField, Range(0, 100)]
     public int dashForce = 30;
+    [SerializeField, Range(0, 10)]
+    public int meleeDamage = 2;
+    [SerializeField, Range(0, 10)]
+    public int bulletDamage = 3;
 
     Vector2 movement;
     Vector2 movementInput;

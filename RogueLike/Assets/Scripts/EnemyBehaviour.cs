@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField, Range(0, 10)]
+    [SerializeField, Range(0, 20)]
     public int vida = 10;
+    [SerializeField, Range(0, 10)]
+    public int meleeDamage = 2;
 
     public int enemyRoom;
     public int dashForce;
@@ -23,6 +27,8 @@ public class EnemyBehaviour : MonoBehaviour
     public Vector2 followPlayer;
     private Vector2 colision;
 
+    private Slider healthSlider;
+
     private Rigidbody2D enemyRb;
 
     private AddRooms addRoomsScript;
@@ -37,6 +43,9 @@ public class EnemyBehaviour : MonoBehaviour
 
         addRoomsScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
         playerScript = GameObject.Find("Jugador2DVC").GetComponent<PlayerController2DVC>();
+        healthSlider = GameObject.Find("BossSlider").GetComponent<Slider>();
+
+        healthSlider.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,6 +54,18 @@ public class EnemyBehaviour : MonoBehaviour
         followPlayer = target.transform.position - transform.position;
 
         transform.up = followPlayer;
+
+        if (enemyRoom == playerScript.room && isBoss)
+        {
+            healthSlider.gameObject.SetActive(true);
+
+            healthSlider.value = vida;
+        }
+
+        if (vida <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -66,8 +87,19 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Attack") && invencible == false || collision.collider.CompareTag("Bullet") && invencible == false)
+        if (collision.collider.CompareTag("Attack") && invencible == false)
         {
+            vida = vida - playerScript.meleeDamage;
+
+            colision = collision.GetContact(0).normal;
+            invencible = true;
+            StartCoroutine(Retroceso());
+        }
+
+        if (collision.collider.CompareTag("Bullet") && invencible == false)
+        {
+            vida = vida - playerScript.bulletDamage;
+
             colision = collision.GetContact(0).normal;
             invencible = true;
             StartCoroutine(Retroceso());

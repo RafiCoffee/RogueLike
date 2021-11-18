@@ -360,12 +360,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620073ad23db18a44abd45d44f8f6f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 10
+  vida: 20
+  meleeDamage: 3
   enemyRoom: 0
   dashForce: 30
   isMoving: 0
   isAtacking: 0
-  isBoss: 0
+  isBoss: 1
   invencible: 0
   visual: {fileID: 5305470357301881632}
   followPlayer: {x: 0, y: 0}

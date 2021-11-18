@@ -7,6 +7,8 @@ public class AddRooms : MonoBehaviour
     public int room;
     public int direccion;
 
+    private bool direccionSet = false;
+
     private RoomTemplates templates;
     private WallDetect wallDetectScript;
 
@@ -17,14 +19,20 @@ public class AddRooms : MonoBehaviour
         templates.rooms.Add(this.gameObject);
 
         room = templates.rooms.Count;
+
+        if (gameObject.tag == "BossRoom")
+        {
+            direccionSet = true;
+        }
     }
 
     void Update()
     {
-        if (templates.waitTime <= 0 && room == templates.rooms.Count - 1)
+        if (templates.waitTime <= 0 && room == templates.rooms.Count && direccionSet == false)
         {
             wallDetectScript = GetComponentInChildren<WallDetect>();
             direccion = wallDetectScript.direccion;
+            direccionSet = true;
         }
     }
 }

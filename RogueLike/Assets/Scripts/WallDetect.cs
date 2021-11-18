@@ -47,7 +47,7 @@ public class WallDetect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("WallDetectT") || collision.CompareTag("WallDetectB") || collision.CompareTag("WallDetectR") || collision.CompareTag("WallDetectL"))
+        if (collision.CompareTag("WallDetectT")|| collision.CompareTag("WallDetectB")|| collision.CompareTag("WallDetectR")|| collision.CompareTag("WallDetectL"))
         {
             switch (collision.gameObject.tag)
             {
@@ -72,7 +72,7 @@ public class WallDetect : MonoBehaviour
                     break;
             }
         }
-        else
+        else if (collision.CompareTag("DungeonLimit") || collision.gameObject.layer == 6)
         {
             Destroy(gameObject);
         }
