@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BossRoom : MonoBehaviour
 {
-    private bool hasNextRoom;
+    private GameObject door;
     // Start is called before the first frame update
     void Start()
     {
-        
+        door = transform.GetChild(transform.childCount - 2).gameObject;
+
+        door.SetActive(false);
     }
 
     // Update is called once per frame
@@ -19,9 +21,9 @@ public class BossRoom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (transform.GetChild(0))
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log("hola");
+            door.SetActive(true);
         }
     }
 }

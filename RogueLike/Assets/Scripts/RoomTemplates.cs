@@ -27,20 +27,25 @@ public class RoomTemplates : MonoBehaviour
     public int enemyRooms;
     private bool enemyRoomsSet = false;
     private int spawnRoom;
+    private bool spawnedBossRoom = false;
 
     private Vector2 spawnBossRoom;
+
+    private AddRooms addRoomsScript;
     void Update()
     {
         if (waitTime <= 0 && spawnedEnemies == false)
         {
-            /*spawnBossRoom = rooms[rooms.Count - 1].transform.position;
-            Destroy(rooms[rooms.Count - 1]);
-            rooms.Remove(rooms[rooms.Count - 1]);
-
-            for (int i = 0; i < 4 + 1; i++)
+            if (spawnedBossRoom == false)
             {
-                Instantiate(bossRooms[i], spawnBossRoom, Quaternion.identity);
-            }*/
+                addRoomsScript = rooms[rooms.Count - 1].GetComponent<AddRooms>();
+                spawnBossRoom = rooms[rooms.Count - 1].transform.position;
+                Destroy(rooms[rooms.Count - 1]);
+                rooms.Remove(rooms[rooms.Count - 1]);
+
+                Instantiate(bossRooms[addRoomsScript.direccion], spawnBossRoom, Quaternion.identity);
+                spawnedBossRoom = true;
+            }
 
             if (enemyRoomsSet == false)
             {
@@ -71,14 +76,18 @@ public class RoomTemplates : MonoBehaviour
                 }
             }
 
-            for (int i = 0; i < rooms.Count; i++)
+            if (spawnedBossRoom)
             {
-                if (i == rooms.Count - 1)
+                for (int i = 0; i < rooms.Count; i++)
                 {
-                    Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
-                    spawnedEnemies = true;
+                    if (i == rooms.Count - 1)
+                    {
+                        Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
+                        spawnedEnemies = true;
+                    }
                 }
             }
+
         }
         else
         {

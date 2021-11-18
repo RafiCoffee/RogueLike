@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b26f4f2f86c73441a401753a19d5e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direccion: 5
 --- !u!1 &2108208468713196982
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +949,7 @@ GameObject:
   - component: {fileID: 1802315863175682425}
   - component: {fileID: 1094578395905512160}
   m_Layer: 9
-  m_Name: WallDetect 2
+  m_Name: WallDetect
   m_TagString: WallDetectB
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,6 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b26f4f2f86c73441a401753a19d5e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direccion: 5
 --- !u!1001 &588944277625822251
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class WallDetect : MonoBehaviour
 
     private bool spawned = false;
 
+    public int direccion = 5;
+
     void Start()
     {
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
@@ -21,18 +23,22 @@ public class WallDetect : MonoBehaviour
             {
                 case "WallDetectT":
                     Instantiate(templates.closedWall[0], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
                     break;
 
                 case "WallDetectB":
                     Instantiate(templates.closedWall[1], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
                     break;
 
                 case "WallDetectR":
                     Instantiate(templates.closedWall[2], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
                     break;
 
                 case "WallDetectL":
                     Instantiate(templates.closedWall[3], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
                     break;
             }
             spawned = true;
@@ -41,9 +47,27 @@ public class WallDetect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("WallDetectT") || collision.CompareTag("WallDetectB") || collision.CompareTag("WallDetectR") || collision.CompareTag("WallDetectL"))
+        switch (collision.gameObject.tag)
         {
-            Destroy(gameObject);
+            case "WallDetectT":
+                spawned = true;
+                direccion = 0;
+                break;
+
+            case "WallDetectB":
+                spawned = true;
+                direccion = 3;
+                break;
+
+            case "WallDetectR":
+                spawned = true;
+                direccion = 1;
+                break;
+
+            case "WallDetectL":
+                spawned = true;
+                direccion = 2;
+                break;
         }
     }
 }

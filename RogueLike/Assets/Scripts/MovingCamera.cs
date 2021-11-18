@@ -27,7 +27,7 @@ public class MovingCamera : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("EntryRoom") || collision.CompareTag("NormalRoom"))
+        if (collision.CompareTag("EntryRoom") || collision.CompareTag("NormalRoom") || collision.CompareTag("BossRoom"))
         {
             children = collision.transform.childCount;
             pointCamera = collision.transform.GetChild(children - 1);

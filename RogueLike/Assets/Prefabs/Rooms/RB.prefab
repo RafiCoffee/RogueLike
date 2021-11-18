@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 7718914772098686475}
   - component: {fileID: 6615972987878163130}
   m_Layer: 9
-  m_Name: WallDetect 2
+  m_Name: WallDetec
   m_TagString: WallDetectR
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b26f4f2f86c73441a401753a19d5e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direccion: 5
 --- !u!1 &1978859055721793495
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: 0
+  direccion: 0
 --- !u!1 &2996966937039637715
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca08b3fdf43ccec41a78a4b341555275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingDirection: 4
+  openingDirection: 3
   waitTime: 4
 --- !u!1 &3330819674111761373
 GameObject:
@@ -997,6 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b26f4f2f86c73441a401753a19d5e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direccion: 5
 --- !u!1 &6397319789994968618
 GameObject:
   m_ObjectHideFlags: 0
