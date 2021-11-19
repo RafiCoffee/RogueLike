@@ -9,13 +9,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController2DVC : MonoBehaviour
 {
-    [SerializeField, Range(0, 10)] 
+    [SerializeField, Range(0, 100)] 
     public int vida = 10;
     [SerializeField, Range(0, 100)]
     public int dashForce = 30;
-    [SerializeField, Range(0, 10)]
+    [SerializeField, Range(0, 50)]
     public int meleeDamage = 2;
-    [SerializeField, Range(0, 10)]
+    [SerializeField, Range(0, 50)]
     public int bulletDamage = 3;
 
     Vector2 movement;
@@ -32,6 +32,7 @@ public class PlayerController2DVC : MonoBehaviour
     public float dashCoolDown = 1.5f;
     private float dashTimer = 0;
     public float bulletCooldown = 0.5f;
+    public float meleeCooldown = 0.8f;
 
     private bool oneTime = true;
     public bool canMove = false;
@@ -42,7 +43,6 @@ public class PlayerController2DVC : MonoBehaviour
     private Rigidbody2D playerRb2D;
     private Slider dashSlider;
 
-    private GameObject attackCollider;
     private GameObject bullet;
     public GameObject visual;
 
@@ -51,16 +51,18 @@ public class PlayerController2DVC : MonoBehaviour
     private AddRooms addRoomScript;
 
     public TextMeshProUGUI ammoText;
+    private Animator playerAnim;
 
     private Stopwatch timerDash = new Stopwatch();
     private Stopwatch timerBullet = new Stopwatch();
+    private Stopwatch timerMelee = new Stopwatch();
     // Start is called before the first frame update
     void Start()
     {
         playerRb2D = GetComponent<Rigidbody2D>();
-        attackCollider = GameObject.Find("AttackCollider");
         bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
         dashSlider = GameObject.Find("Dash").GetComponent<Slider>();
+        playerAnim = GetComponent<Animator>();
 
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
@@ -68,12 +70,11 @@ public class PlayerController2DVC : MonoBehaviour
             addRoomScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
         }
 
-        attackCollider.SetActive(false);
-
         dashTime = StartDashTime;
 
         timerDash.Start();
         timerBullet.Start();
+        timerMelee.Start();
     }
 
     // Update is called once per frame
@@ -171,9 +172,10 @@ public class PlayerController2DVC : MonoBehaviour
             movement = movementInput.normalized * movementSpeed * Time.deltaTime;
 
             //Ataque
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && timerMelee.ElapsedMilliseconds / 1000 > meleeCooldown)
             {
-                StartCoroutine(Attack());
+                playerAnim.SetTrigger("Attack");
+                timerMelee.Restart();
             }
             //Ataque
 
@@ -267,20 +269,11 @@ public class PlayerController2DVC : MonoBehaviour
     {
         bullet = bulletPool.GetPooledObject();
         bullet.SetActive(true);
-        bullet.transform.position = transform.GetChild(1).GetChild(1).GetChild(0).position;
-        bullet.transform.rotation = transform.GetChild(1).GetChild(1).GetChild(0).rotation;
+        bullet.transform.position = transform.GetChild(1).GetChild(4).GetChild(0).position;
+        bullet.transform.rotation = transform.GetChild(1).GetChild(4).GetChild(0).rotation;
 
         ammo--;
         timerBullet.Restart();
-    }
-
-    IEnumerator Attack()
-    {
-        invencible = true;
-        attackCollider.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        attackCollider.SetActive(false);
-        invencible = false;
     }
 
     IEnumerator Retroceso()

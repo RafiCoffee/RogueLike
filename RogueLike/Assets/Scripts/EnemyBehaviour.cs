@@ -7,10 +7,10 @@ using Debug = UnityEngine.Debug;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField, Range(0, 20)]
-    public int vida = 10;
-    [SerializeField, Range(0, 10)]
-    public int meleeDamage = 2;
+    [SerializeField, Range(0, 500)]
+    public int vida = 50;
+    [SerializeField, Range(0, 50)]
+    public int meleeDamage = 20;
 
     public int enemyRoom;
     public int dashForce;
@@ -43,9 +43,13 @@ public class EnemyBehaviour : MonoBehaviour
 
         addRoomsScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
         playerScript = GameObject.Find("Jugador2DVC").GetComponent<PlayerController2DVC>();
-        healthSlider = GameObject.Find("BossSlider").GetComponent<Slider>();
+        if (isBoss)
+        {
+            healthSlider = GameObject.Find("BossSlider").GetComponent<Slider>();
 
-        healthSlider.gameObject.SetActive(false);
+            healthSlider.maxValue = vida;
+            healthSlider.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

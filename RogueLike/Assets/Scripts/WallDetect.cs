@@ -72,9 +72,35 @@ public class WallDetect : MonoBehaviour
                     break;
             }
         }
-        else if (collision.CompareTag("DungeonLimit") || collision.gameObject.layer == 6)
+        else if (collision.CompareTag("DungeonLimit"))
         {
             Destroy(gameObject);
+        }
+        else if (collision.gameObject.layer == 6)
+        {
+            switch (gameObject.tag)
+            {
+                case "WallDetectT":
+                    Instantiate(templates.closedWall[0], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
+                    break;
+
+                case "WallDetectB":
+                    Instantiate(templates.closedWall[1], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
+                    break;
+
+                case "WallDetectR":
+                    Instantiate(templates.closedWall[2], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
+                    break;
+
+                case "WallDetectL":
+                    Instantiate(templates.closedWall[3], transform.position, Quaternion.identity, templates.room.transform);
+                    Destroy(gameObject);
+                    break;
+            }
+            spawned = true;
         }
     }
 }

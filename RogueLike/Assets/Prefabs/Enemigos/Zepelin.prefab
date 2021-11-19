@@ -93,7 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620073ad23db18a44abd45d44f8f6f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 10
+  vida: 40
+  meleeDamage: 10
   enemyRoom: 0
   dashForce: 30
   isMoving: 0

@@ -13,6 +13,7 @@ public class RoomTemplates : MonoBehaviour
     public GameObject closedRoom;
     public GameObject[] closedWall;
     public GameObject room;
+    public GameObject spawners;
 
     public List<GameObject> rooms;
 
@@ -65,7 +66,7 @@ public class RoomTemplates : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(spawnEnemies, rooms[i].transform.position, Quaternion.identity);
+                            Instantiate(spawnEnemies, rooms[i].transform.position, Quaternion.identity, spawners.transform);
                         }
                     }
                     else if (spawnRoom == 1)

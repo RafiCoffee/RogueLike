@@ -1231,6 +1231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: 0
+  direccion: 0
 --- !u!1 &4297770736932924081
 GameObject:
   m_ObjectHideFlags: 0

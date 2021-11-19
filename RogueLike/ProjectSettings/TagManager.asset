@@ -19,6 +19,7 @@ TagManager:
   - WallDetectL
   - BossRoom
   - EnemyWall
+  - SpawnEnemies
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - EnemyWall
   - Destroyer
   - Room
-  - 
+  - SpawnEnemies
   - 
   - 
   - 
