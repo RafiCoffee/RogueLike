@@ -31,8 +31,9 @@ public class BossBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (timerAttack.ElapsedMilliseconds / 1000 < attackCooldown)
+        if (timerAttack.ElapsedMilliseconds / 1000 > attackCooldown && collision.CompareTag("Player"))
         {
+            enemyScript.bossAnim.Play("Attack");
             StartCoroutine(Attack());
         }
     }
@@ -41,7 +42,7 @@ public class BossBehaviour : MonoBehaviour
     {
         enemyScript.invencible = true;
         attackCollider.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         attackCollider.SetActive(false);
         enemyScript.invencible = false;
         timerAttack.Restart();

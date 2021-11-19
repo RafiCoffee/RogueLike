@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6606849608657521836}
   - component: {fileID: 463136149130122455}
+  - component: {fileID: 745735237958774954}
   - component: {fileID: 7571898554751547580}
   - component: {fileID: -2177383706559564504}
   m_Layer: 10
@@ -60,6 +61,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5070461, y: 1.5515137}
   m_EdgeRadius: 0
+--- !u!95 &745735237958774954
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508158112764542065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9dc4379b0bd6d74489c88dd20e8764ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &7571898554751547580
 Rigidbody2D:
   serializedVersion: 4
@@ -98,11 +118,13 @@ MonoBehaviour:
   enemyRoom: 0
   dashForce: 30
   isMoving: 0
-  isAtacking: 0
+  isAttack: 0
   isBoss: 0
+  isFurnace: 1
   invencible: 0
   visual: {fileID: 150365148783366843}
   followPlayer: {x: 0, y: 0}
+  bossAnim: {fileID: 0}
 --- !u!1001 &6207728567339154408
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -39,8 +39,10 @@ public class PlayerController2DVC : MonoBehaviour
     public bool canDash = false;
     private bool isDashing = false;
     private bool invencible = false;
+    public bool isAttacking = false;
 
     private Rigidbody2D playerRb2D;
+    private BoxCollider2D playerBc2D;
     private Slider dashSlider;
 
     private GameObject bullet;
@@ -60,6 +62,7 @@ public class PlayerController2DVC : MonoBehaviour
     void Start()
     {
         playerRb2D = GetComponent<Rigidbody2D>();
+        playerBc2D = GetComponent<BoxCollider2D>();
         bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
         dashSlider = GameObject.Find("Dash").GetComponent<Slider>();
         playerAnim = GetComponent<Animator>();
@@ -105,6 +108,7 @@ public class PlayerController2DVC : MonoBehaviour
             //Dash
             if (Input.GetKeyDown(KeyCode.LeftShift) & timerDash.ElapsedMilliseconds / 1000 > dashCoolDown)
             {
+                gameObject.layer = 16;
                 canMove = false;
                 if (direction != 0)
                 {
@@ -158,6 +162,7 @@ public class PlayerController2DVC : MonoBehaviour
                     canMove = true;
                     isDashing = false;
                     dashTimer = 0;
+                    gameObject.layer = 7;
                     timerDash.Restart();
                 }
             }
@@ -247,7 +252,7 @@ public class PlayerController2DVC : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Enemy") && invencible == false)
+        if (collision.collider.CompareTag("Enemy") && invencible == false && isAttacking == false)
         {
             colision = collision.GetContact(0).normal;
             invencible = true;

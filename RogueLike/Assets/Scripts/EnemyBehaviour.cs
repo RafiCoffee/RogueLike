@@ -15,9 +15,12 @@ public class EnemyBehaviour : MonoBehaviour
     public int enemyRoom;
     public int dashForce;
 
+    private float meleeCooldown;
+
     public bool isMoving = false;
-    public bool isAtacking;
+    public bool isAttack = false;
     public bool isBoss = false;
+    public bool isFurnace = false;
     public bool invencible = false;
 
     private GameObject target;
@@ -30,6 +33,8 @@ public class EnemyBehaviour : MonoBehaviour
     private Slider healthSlider;
 
     private Rigidbody2D enemyRb;
+    private Animator enemyAnim;
+    public Animation bossAnim;
 
     private AddRooms addRoomsScript;
     private PlayerController2DVC playerScript;
@@ -39,13 +44,16 @@ public class EnemyBehaviour : MonoBehaviour
         initialPosition = transform.position;
 
         enemyRb = GetComponent<Rigidbody2D>();
+        enemyAnim = GetComponent<Animator>();
         target = GameObject.Find("Jugador2DVC");
 
         addRoomsScript = GameObject.Find("Entry Room").GetComponent<AddRooms>();
         playerScript = GameObject.Find("Jugador2DVC").GetComponent<PlayerController2DVC>();
+
         if (isBoss)
         {
             healthSlider = GameObject.Find("BossSlider").GetComponent<Slider>();
+            bossAnim = transform.GetChild(1).GetComponent<Animation>();
 
             healthSlider.maxValue = vida;
             healthSlider.gameObject.SetActive(false);
@@ -74,24 +82,43 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (enemyRoom == playerScript.room)
+        if (isFurnace == false)
         {
-            StartCoroutine(Wait());
-            if (isMoving)
+            if (enemyRoom == playerScript.room)
             {
-                enemyRb.MovePosition((Vector2)transform.position + (followPlayer / 1.5f * Time.deltaTime));
+                StartCoroutine(Wait());
+                if (isMoving)
+                {
+                    if (isBoss)
+                    {
+                        bossAnim.Play("Walk");
+                    }
+                    enemyRb.MovePosition((Vector2)transform.position + (followPlayer / 1.5f * Time.deltaTime));
+                }
+            }
+            else
+            {
+                isMoving = false;
+                enemyRb.MovePosition(initialPosition);
             }
         }
         else
         {
-            isMoving = false;
-            enemyRb.MovePosition(initialPosition);
+            if(enemyRoom == playerScript.room)
+            {
+                StartCoroutine(WaitFurnace());
+                if(isAttack == false)
+                {
+                    isAttack = true;
+                    StartCoroutine(Attack());
+                }
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Attack") && invencible == false)
+        if (collision.collider.gameObject.layer == 15 && invencible == false)
         {
             vida = vida - playerScript.meleeDamage;
 
@@ -122,8 +149,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         isMoving = true;
+    }
+
+    IEnumerator WaitFurnace()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator Retroceso()
@@ -146,5 +178,13 @@ public class EnemyBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         visual.SetActive(true);
         invencible = false;
+    }
+
+    IEnumerator Attack()
+    {
+        meleeCooldown = Random.Range(1f, 4f);
+        enemyAnim.SetTrigger("Attack");
+        yield return new WaitForSeconds(meleeCooldown);
+        isAttack = false;
     }
 }

@@ -367,6 +367,7 @@ MonoBehaviour:
   isMoving: 0
   isAtacking: 0
   isBoss: 1
+  isFurnace: 0
   invencible: 0
   visual: {fileID: 5305470357301881632}
   followPlayer: {x: 0, y: 0}
@@ -550,6 +551,8 @@ Animation:
   m_Animation: {fileID: 1827226128182048838, guid: 6bf519c7ceae878449487cc228a972de, type: 3}
   m_Animations:
   - {fileID: 1827226128182048838, guid: 6bf519c7ceae878449487cc228a972de, type: 3}
+  - {fileID: 1827226128182048838, guid: 087f0296d305bd44c9614f1cc635db05, type: 3}
+  - {fileID: 1827226128182048838, guid: da05acace0c3ef24a8eede4c72c26248, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

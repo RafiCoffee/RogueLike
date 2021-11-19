@@ -36,8 +36,8 @@ TagManager:
   - Destroyer
   - Room
   - SpawnEnemies
-  - 
-  - 
+  - Attack
+  - PlayerDash
   - 
   - 
   - 
