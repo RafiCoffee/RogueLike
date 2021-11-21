@@ -19,12 +19,6 @@ public class RoomSpawner : MonoBehaviour
         Destroy(gameObject, waitTime);
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
 
-        if (templates.rooms.Count == templates.roomMin)
-        {
-            closedRoom = 0;
-        }
-
-
         if (templates.rooms.Count >= templates.roomMax)
         {
             spawned = true;

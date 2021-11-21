@@ -22,9 +22,11 @@ public class EnemyBehaviour : MonoBehaviour
     public bool isBoss = false;
     public bool isFurnace = false;
     public bool invencible = false;
+    private bool shooted = false;
 
     private GameObject target;
     public GameObject visual;
+    private GameObject fireBall;
 
     private Vector2 initialPosition;
     public Vector2 followPlayer;
@@ -38,6 +40,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private AddRooms addRoomsScript;
     private PlayerController2DVC playerScript;
+    private BulletPool fireBallPool;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +61,11 @@ public class EnemyBehaviour : MonoBehaviour
             healthSlider.maxValue = vida;
             healthSlider.gameObject.SetActive(false);
         }
+
+        if (isFurnace)
+        {
+            fireBallPool = GameObject.Find("FireBallPool").GetComponent<BulletPool>();
+        }
     }
 
     // Update is called once per frame
@@ -76,6 +84,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (vida <= 0)
         {
+            playerScript.ammo = playerScript.ammo + 3;
             Destroy(gameObject);
         }
     }
@@ -147,6 +156,14 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    public void Shoot()
+    {
+        fireBall = fireBallPool.GetPooledObject();
+        fireBall.SetActive(true);
+        fireBall.transform.position = transform.GetChild(1).position;
+        fireBall.transform.rotation = Quaternion.identity;
+    }
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1f);
@@ -183,8 +200,15 @@ public class EnemyBehaviour : MonoBehaviour
     IEnumerator Attack()
     {
         meleeCooldown = Random.Range(1f, 4f);
-        enemyAnim.SetTrigger("Attack");
+        if (shooted == false)
+        {
+            enemyAnim.SetTrigger("Attack");
+            yield return new WaitForSeconds(0.35f);
+            Shoot();
+            shooted = true;
+        }
         yield return new WaitForSeconds(meleeCooldown);
         isAttack = false;
+        shooted = false;
     }
 }

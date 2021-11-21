@@ -10,13 +10,13 @@ using UnityEngine.SceneManagement;
 public class PlayerController2DVC : MonoBehaviour
 {
     [SerializeField, Range(0, 100)] 
-    public int vida = 10;
+    public int vida = 50;
     [SerializeField, Range(0, 100)]
     public int dashForce = 30;
     [SerializeField, Range(0, 50)]
-    public int meleeDamage = 2;
+    public int meleeDamage = 5;
     [SerializeField, Range(0, 50)]
-    public int bulletDamage = 3;
+    public int bulletDamage = 10;
 
     Vector2 movement;
     Vector2 movementInput;
@@ -25,6 +25,7 @@ public class PlayerController2DVC : MonoBehaviour
     public int room;
     private int direction = 1;
     public int ammo = 10;
+    public int buffo = 0; 
 
     public float movementSpeed = 30f;
     private float dashTime;
@@ -40,6 +41,9 @@ public class PlayerController2DVC : MonoBehaviour
     private bool isDashing = false;
     private bool invencible = false;
     public bool isAttacking = false;
+    public bool haveMap = false;
+    private bool buffoSet = false;
+    public bool isDead = false;
 
     private Rigidbody2D playerRb2D;
     private BoxCollider2D playerBc2D;
@@ -47,6 +51,9 @@ public class PlayerController2DVC : MonoBehaviour
 
     private GameObject bullet;
     public GameObject visual;
+    public GameObject upgrade1;
+    public GameObject upgrade2;
+    public GameObject upgrade3;
 
     private RoomTemplates templates;
     private BulletPool bulletPool;
@@ -74,6 +81,7 @@ public class PlayerController2DVC : MonoBehaviour
         }
 
         dashTime = StartDashTime;
+        buffo = 0;
 
         timerDash.Start();
         timerBullet.Start();
@@ -240,6 +248,51 @@ public class PlayerController2DVC : MonoBehaviour
         {
             ammoText.text = ammo.ToString();
         }
+
+        if (vida <= 0)
+        {
+            isDead = true;
+        }
+
+        if (isDead)
+        {
+            gameObject.SetActive(false);
+        }
+
+        switch(buffo)
+        {
+            case 1:
+                if (buffoSet == false)
+                {
+                    upgrade1.SetActive(true);
+                    meleeDamage = 10;
+                    bulletDamage = 15;
+                    buffoSet = true;
+                }
+                break;
+
+            case 2:
+                if (buffoSet)
+                {
+                    upgrade1.SetActive(false);
+                    upgrade2.SetActive(true);
+                    meleeDamage = 15;
+                    bulletDamage = 20;
+                    buffoSet = false;
+                }
+                break;
+
+            case 3:
+                if(buffoSet == false)
+                {
+                    upgrade2.SetActive(false);
+                    upgrade3.SetActive(true);
+                    meleeDamage = 20;
+                    bulletDamage = 25;
+                    buffoSet = true;
+                }
+                break;
+        }
     }
 
     private void FixedUpdate()
@@ -255,6 +308,23 @@ public class PlayerController2DVC : MonoBehaviour
         if (collision.collider.CompareTag("Enemy") && invencible == false && isAttacking == false)
         {
             colision = collision.GetContact(0).normal;
+            vida = vida - 5;
+            invencible = true;
+            StartCoroutine(Retroceso());
+        }
+
+        if (collision.collider.CompareTag("Fire") && invencible == false && isAttacking == false)
+        {
+            colision = collision.GetContact(0).normal;
+            vida = vida - 10;
+            invencible = true;
+            StartCoroutine(Retroceso());
+        }
+
+        if (collision.collider.CompareTag("Boss") && invencible == false && isAttacking == false)
+        {
+            colision = collision.GetContact(0).normal;
+            vida = vida - 10;
             invencible = true;
             StartCoroutine(Retroceso());
         }
@@ -267,6 +337,19 @@ public class PlayerController2DVC : MonoBehaviour
             addRoomScript = collision.gameObject.GetComponent<AddRooms>();
 
             room = addRoomScript.room;
+        }
+
+
+        if (collision.CompareTag("Map"))
+        {
+            haveMap = true;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.CompareTag("Buffo"))
+        {
+            buffo++;
+            Destroy(collision.gameObject);
         }
     }
 

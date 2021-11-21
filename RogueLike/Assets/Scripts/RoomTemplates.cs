@@ -14,20 +14,27 @@ public class RoomTemplates : MonoBehaviour
     public GameObject[] closedWall;
     public GameObject room;
     public GameObject spawners;
+    public GameObject objects;
 
     public List<GameObject> rooms;
 
     public int roomMax;
     public int roomMin;
+    private int buff = 0;
     public float waitTime;
     private bool spawnedEnemies = false;
     public GameObject boss;
     public GameObject spawnEnemies;
+    public GameObject map;
+    public GameObject buffos;
 
     public int enemyRooms;
+    private int enemiesSpawned = 0;
     private bool enemyRoomsSet = false;
     private int spawnRoom;
     private bool spawnedBossRoom = false;
+    private bool buffosSet = false;
+    private bool mapSet = false;
 
     private Vector2 spawnBossRoom;
 
@@ -43,35 +50,126 @@ public class RoomTemplates : MonoBehaviour
                 Destroy(rooms[rooms.Count - 1]);
                 rooms.Remove(rooms[rooms.Count - 1]);
 
-                Instantiate(bossRooms[addRoomsScript.direccion], spawnBossRoom, Quaternion.identity);
+                Instantiate(bossRooms[addRoomsScript.direccion], spawnBossRoom, Quaternion.identity, room.transform);
                 spawnedBossRoom = true;
             }
 
             if (enemyRoomsSet == false)
             {
-                enemyRooms = Random.Range(3, rooms.Count - 4);
+                enemyRooms = Random.Range(3, rooms.Count - 5);
                 enemyRoomsSet = true;
             }
 
-            if (enemyRoomsSet)
+            if (buffosSet == false)
             {
-                for (int i = 0; i < enemyRooms + 1; i++)
+                for (int i = 0; i < 100; i++)
                 {
-                    spawnRoom = Random.Range(0, 2);
-                    if (spawnRoom == 0)
+                    addRoomsScript = rooms[i].GetComponent<AddRooms>();
+                    if (buff == 3)
                     {
-                        if (i == 0)
+                        buffosSet = true;
+                        i = 101;
+                    }
+                    else
+                    {
+                        spawnRoom = Random.Range(0, 2);
+                        if (spawnRoom == 0)
                         {
-                            i = 1;
+                            if (i == 0 || i == rooms.Count - 1)
+                            {
+                                i = 1;
+                            }
+                            else
+                            {
+                                Instantiate(buffos, rooms[i].transform.position + new Vector3(0, 0, -1), Quaternion.identity, objects.transform);
+                                addRoomsScript.ocupado = true;
+                                buff++;
+                            }
                         }
-                        else
+                        else if (spawnRoom == 1)
                         {
-                            Instantiate(spawnEnemies, rooms[i].transform.position, Quaternion.identity, spawners.transform);
+                            i++;
                         }
                     }
-                    else if (spawnRoom == 1)
+                }
+            }
+
+            if (mapSet == false && buffosSet)
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    addRoomsScript = rooms[i].GetComponent<AddRooms>();
+                    if (buff == 0)
                     {
-                        i--;
+                        mapSet = true;
+                        i = 101;
+                    }
+                    else
+                    {
+                        spawnRoom = Random.Range(0, 2);
+                        if (spawnRoom == 0)
+                        {
+                            if (i == 0 || i == rooms.Count - 1)
+                            {
+                                i = 1;
+                            }
+                            else
+                            {
+                                if (addRoomsScript.ocupado)
+                                {
+                                    i++;
+                                }
+                                else
+                                {
+                                    Instantiate(map, rooms[i].transform.position + new Vector3(0, 0, -1), Quaternion.identity, objects.transform);
+                                    addRoomsScript.ocupado = true;
+                                    buff = 0;
+                                }
+                            }
+                        }
+                        else if (spawnRoom == 1)
+                        {
+                            i++;
+                        }
+                    }
+                }
+            }
+
+            if (enemyRoomsSet && buffosSet && mapSet)
+            {
+                for (int i = 0; enemiesSpawned < enemyRooms; i++)
+                {
+                    addRoomsScript = rooms[i].GetComponent<AddRooms>();
+                    if (i >= rooms.Count - 1)
+                    {
+                        i = 0;
+                    }
+                    else
+                    {
+                        spawnRoom = Random.Range(0, 2);
+                        if (spawnRoom == 0)
+                        {
+                            if (i == 0)
+                            {
+                                i = 1;
+                            }
+                            else
+                            {
+                                if (addRoomsScript.ocupado)
+                                {
+                                    i++;
+                                }
+                                else
+                                {
+                                    Instantiate(spawnEnemies, rooms[i].transform.position, Quaternion.identity, spawners.transform);
+                                    enemiesSpawned++;
+                                }
+                            }
+                        }
+                        else if (spawnRoom == 1)
+                        {
+                            i++;
+                        }
                     }
                 }
             }
@@ -82,7 +180,7 @@ public class RoomTemplates : MonoBehaviour
                 {
                     if (i == rooms.Count - 1)
                     {
-                        Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
+                        Instantiate(boss, rooms[i].transform.position, Quaternion.identity, spawners.transform);
                         spawnedEnemies = true;
                     }
                 }

@@ -20,6 +20,10 @@ TagManager:
   - BossRoom
   - EnemyWall
   - SpawnEnemies
+  - Fire
+  - Boss
+  - Buffo
+  - Map
   layers:
   - Default
   - TransparentFX
@@ -38,10 +42,10 @@ TagManager:
   - SpawnEnemies
   - Attack
   - PlayerDash
-  - 
-  - 
-  - 
-  - 
+  - BossWall
+  - Fire
+  - MiniMap
+  - Objetos
   - 
   - 
   - 

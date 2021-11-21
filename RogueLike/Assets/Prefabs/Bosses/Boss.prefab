@@ -258,13 +258,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8469747411921363974}
   - component: {fileID: 1831096180198597037}
-  - component: {fileID: 4045429036565890506}
+  - component: {fileID: 349733931206557261}
   - component: {fileID: 6570803901647710205}
   - component: {fileID: 3263378496552500066}
   - component: {fileID: 2580574492671576061}
   m_Layer: 10
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -311,7 +311,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2, y: 2.7034242}
   m_EdgeRadius: 0
---- !u!58 &4045429036565890506
+--- !u!58 &349733931206557261
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,7 +326,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 2.63
 --- !u!50 &6570803901647710205
 Rigidbody2D:
   serializedVersion: 4
@@ -365,12 +365,13 @@ MonoBehaviour:
   enemyRoom: 0
   dashForce: 30
   isMoving: 0
-  isAtacking: 0
+  isAttack: 0
   isBoss: 1
   isFurnace: 0
   invencible: 0
   visual: {fileID: 5305470357301881632}
   followPlayer: {x: 0, y: 0}
+  bossAnim: {fileID: 0}
 --- !u!114 &2580574492671576061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +663,7 @@ GameObject:
   - component: {fileID: 8260387013639033562}
   m_Layer: 10
   m_Name: AttackCollider
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

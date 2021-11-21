@@ -10,6 +10,7 @@ public class AddRooms : MonoBehaviour
 
     private bool direccionSet = false;
     private bool isPlayer = false;
+    public bool ocupado = false;
 
     private RoomTemplates templates;
     private WallDetect wallDetectScript;
@@ -62,6 +63,11 @@ public class AddRooms : MonoBehaviour
                 entities++;
                 isPlayer = true;
             }
+        }
+
+        if (collision.gameObject.layer == 20 && collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
+        {
+            ocupado = true;
         }
     }
 

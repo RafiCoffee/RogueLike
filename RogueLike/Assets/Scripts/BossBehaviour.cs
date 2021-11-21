@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics;
 
 public class BossBehaviour : MonoBehaviour
 {
     public float attackCooldown = 1;
 
     private GameObject attackCollider;
-
-    private Stopwatch timerAttack = new Stopwatch();
 
     private EnemyBehaviour enemyScript;
     // Start is called before the first frame update
@@ -20,7 +17,7 @@ public class BossBehaviour : MonoBehaviour
 
         enemyScript.isBoss = true;
 
-        timerAttack.Start();
+        attackCollider.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,8 +28,9 @@ public class BossBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (timerAttack.ElapsedMilliseconds / 1000 > attackCooldown && collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
+            enemyScript.bossAnim.Stop();
             enemyScript.bossAnim.Play("Attack");
             StartCoroutine(Attack());
         }
@@ -41,10 +39,11 @@ public class BossBehaviour : MonoBehaviour
     IEnumerator Attack()
     {
         enemyScript.invencible = true;
+        enemyScript.isMoving = false;
         attackCollider.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
         attackCollider.SetActive(false);
         enemyScript.invencible = false;
-        timerAttack.Restart();
+        enemyScript.isMoving = true;
     }
 }

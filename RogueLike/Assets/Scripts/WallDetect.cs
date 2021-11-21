@@ -72,11 +72,7 @@ public class WallDetect : MonoBehaviour
                     break;
             }
         }
-        else if (collision.CompareTag("DungeonLimit"))
-        {
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.layer == 6)
+        /*else if (collision.gameObject.layer == 6)
         {
             switch (gameObject.tag)
             {
@@ -101,6 +97,14 @@ public class WallDetect : MonoBehaviour
                     break;
             }
             spawned = true;
+        }*/
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (templates.waitTime < 1 && collision.CompareTag("DungeonLimit") && collision.gameObject.layer != 9 && collision.gameObject.layer != 6)
+        {
+            Destroy(gameObject);
         }
     }
 }
